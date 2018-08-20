@@ -32,7 +32,7 @@ In this demo, you will create a new Azure AD web application registration using 
 
         ![Screenshot creating a platform for the app](/Images/arp-create-app-04.png)
 
-    1. In the **Web** platform box, enter the URL `http://localhost:8000/auth/callback` for the **Redirect URLs**.
+    1. In the **Web** platform box, enter the URL `http://localhost:3000/auth/callback` for the **Redirect URLs**.
 
         ![Screenshot of the newly added Web platform for the application](/Images/arp-create-app-05.png)
 

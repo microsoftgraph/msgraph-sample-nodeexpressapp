@@ -132,12 +132,12 @@ Start by creating the global layout for the app. Open the `./views/layout.hbs` f
                   <h5 class="dropdown-item-text mb-0">{{ user.name }}</h5>
                   <p class="dropdown-item-text text-muted mb-0">{{ user.email }}</p>
                   <div class="dropdown-divider"></div>
-                  <a href="/signout" class="dropdown-item">Sign Out</a>
+                  <a href="/auth/signout" class="dropdown-item">Sign Out</a>
                 </div>
               </li>
             {{else}}
               <li class="nav-item">
-                <a href="/signin" class="nav-link">Sign In</a>
+                <a href="/auth/signin" class="nav-link">Sign In</a>
               </li>
             {{/if}}
           </ul>
@@ -186,7 +186,7 @@ Now update the default page. Open the `./views/index.hbs` file and replace its c
     <h4>Welcome {{ user.name }}!</h4>
     <p>Use the navigation bar at the top of the page to get started.</p>
   {{else}}
-    <a href="/signin" class="btn btn-primary btn-large">Click here to sign in</a>
+    <a href="/auth/signin" class="btn btn-primary btn-large">Click here to sign in</a>
   {{/if}}
 </div>
 ```
