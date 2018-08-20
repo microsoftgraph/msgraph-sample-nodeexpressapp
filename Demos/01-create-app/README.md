@@ -71,9 +71,10 @@ app.use(session({
 // Flash middleware
 app.use(flash());
 
-// Read any flashed errors and save
-// in the response locals
+// Set up local vars for template layout
 app.use(function(req, res, next) {
+  // Read any flashed errors and save
+  // in the response locals
   res.locals.error = req.flash('error_msg');
 
   // Check for simple error string and
