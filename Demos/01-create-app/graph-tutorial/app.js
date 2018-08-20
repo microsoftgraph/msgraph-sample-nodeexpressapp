@@ -28,6 +28,14 @@ app.use(flash());
 // in the response locals
 app.use(function(req, res, next) {
   res.locals.error = req.flash('error_msg');
+
+  // Check for simple error string and
+  // convert to layout's expected format
+  var errs = req.flash('error');
+  for (var i in errs){
+    res.locals.error.push({message: 'An error occurred', debug: errs[i]});
+  }
+
   next();
 });
 
