@@ -30,9 +30,6 @@ router.post('/callback',
     )(req,res,next);
   },
   function(req, res) {
-    // TEMPORARY!
-    // Flash the access token for testing purposes
-    req.flash('error_msg', {message: 'Access token', debug: req.user.accessToken});
     res.redirect('/');
   }
 );

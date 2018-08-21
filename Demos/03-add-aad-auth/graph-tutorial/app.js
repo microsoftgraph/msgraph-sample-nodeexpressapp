@@ -8,6 +8,20 @@ var session = require('express-session');
 var flash = require('connect-flash');
 var passport = require('passport');
 var OIDCStrategy = require('passport-azure-ad').OIDCStrategy;
+var graph = require('./graph');
+
+// Configure simple-oauth2
+const oauth2 = require('simple-oauth2').create({
+  client: {
+    id: process.env.OAUTH_APP_ID,
+    secret: process.env.OAUTH_APP_PASSWORD
+  },
+  auth: {
+    tokenHost: process.env.OAUTH_AUTHORITY,
+    authorizePath: process.env.OAUTH_AUTHORIZE_ENDPOINT,
+    tokenPath: process.env.OAUTH_TOKEN_ENDPOINT
+  }
+});
 
 // Configure passport
 
@@ -28,10 +42,36 @@ passport.deserializeUser(function(id, done) {
   done(null, users[id]);
 });
 
+// Callback function called once the sign-in is complete
+// and an access token has been obtained
+async function signInComplete(iss, sub, profile, accessToken, refreshToken, params, done) {
+  if (!profile.oid) {
+    return done(new Error("No OID found in user profile."), null);
+  }
+
+  try{
+    const user = await graph.getUserDetails(accessToken);
+
+    if (user) {
+      // Add properties to profile
+      profile['email'] = user.mail ? user.mail : user.userPrincipalName;
+    }
+  } catch (err) {
+    done(err, null);
+  }
+
+  // Create a simple-oauth2 token from raw tokens
+  let oauthToken = oauth2.accessToken.create(params);
+
+  // Save the profile and tokens in user storage
+  users[profile.oid] = { profile, oauthToken };
+  return done(null, users[profile.oid]);
+}
+
 // Configure OIDC strategy
 passport.use(new OIDCStrategy(
   {
-    identityMetadata: process.env.OAUTH_ID_METADATA,
+    identityMetadata: `${process.env.OAUTH_AUTHORITY}${process.env.OAUTH_ID_METADATA}`,
     clientID: process.env.OAUTH_APP_ID,
     responseType: 'code id_token',
     responseMode: 'form_post',
@@ -42,16 +82,7 @@ passport.use(new OIDCStrategy(
     passReqToCallback: false,
     scope: process.env.OAUTH_SCOPES.split(' ')
   },
-  function(iss, sub, profile, accessToken, refreshToken, done) {
-    if (!profile.oid) {
-      return done(new Error("No OID found in user profile."), null);
-    }
-
-    // Save the profile, accessToken, and refreshToken in
-    // user storage
-    users[profile.oid] = { profile, accessToken, refreshToken };
-    return done(null, users[profile.oid]);
-  }
+  signInComplete
 ));
 
 var indexRouter = require('./routes/index');
@@ -102,6 +133,15 @@ app.use(express.static(path.join(__dirname, 'public')));
 // Initialize passport
 app.use(passport.initialize());
 app.use(passport.session());
+
+app.use(function(req, res, next) {
+  // Set the authenticated user in the
+  // template locals
+  if (req.user) {
+    res.locals.user = req.user.profile;
+  }
+  next();
+});
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
