@@ -326,3 +326,41 @@ Click the user avatar in the top right corner to access the **Sign Out** link. C
 
 ![A screenshot of the dropdown menu with the Sign Out link](/Images/add-aad-auth-02.png)
 
+## Refreshing tokens
+
+At this point your application has an access token, which is sent in the `Authorization` header of API calls. This is the token that allows the app to access the Microsoft Graph on the user's behalf.
+
+However, this token is short-lived. The token expires an hour after it is issued. This is where the refresh token becomes useful. The refresh token allows the app to request a new access token without requiring the user to sign in again.
+
+To manage this, create a new file in the root of the project named `tokens.js` to hold token management functions. Add the following code.
+
+```js
+module.exports = {
+  getAccessToken: async function(req) {
+    if (req.user) {
+      // Get the stored token
+      var storedToken = req.user.oauthToken;
+
+      if (storedToken) {
+        if (storedToken.expired()) {
+          // refresh token
+          var newToken = await storedToken.refresh();
+
+          // Update stored token
+          req.user.oauthToken = newToken;
+          return newToken.token.access_token;
+        }
+
+        // Token still valid, just return it
+        return storedToken.token.access_token;
+      }
+    }
+  }
+};
+```
+
+This method first checks if the access token is expired or close to expiring. If it is, then it uses the refresh token to get new tokens, then updates the cache and returns the new access token. You'll use this method whenever you need to get the access token out of storage.
+
+## Next steps
+
+Now that you've added authentication, you can continue to the next module, [Extend the Node.js Express app for Microsoft Graph](../04-add-msgraph/README.md).
