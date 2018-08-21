@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Node.js Graph Tutorial</title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
+  </head>
+
+  <body>
+    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+      <div class="container">
+        <a href="/" class="navbar-brand">Node.js Graph Tutorial</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+              <a href="/" class="nav-link{{#if active.home}} active{{/if}}">Home</a>
+            </li>
+            {{#if user}}
+              <li class="nav-item" data-turbolinks="false">
+                <a href="/calendar" class="nav-link{{#if active.calendar}} active{{/if}}">Calendar</a>
+              </li>
+            {{/if}}
+          </ul>
+          <ul class="navbar-nav justify-content-end">
+            <li class="nav-item">
+              <a class="nav-link" href="https://developer.microsoft.com/graph/docs/concepts/overview" target="_blank"><i class="fas fa-external-link-alt mr-1"></i>Docs</a>
+            </li>
+            {{#if user}}
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                  {{#if user.avatar}}
+                    <img src="{{ user.avatar }}" class="rounded-circle align-self-center mr-2" style="width: 32px;">
+                  {{else}}
+                    <i class="far fa-user-circle fa-lg rounded-circle align-self-center mr-2" style="width: 32px;"></i>
+                  {{/if}}
+                </a>
+                <div class="dropdown-menu dropdown-menu-right">
+                  <h5 class="dropdown-item-text mb-0">{{ user.displayName }}</h5>
+                  <p class="dropdown-item-text text-muted mb-0">{{ user.email }}</p>
+                  <div class="dropdown-divider"></div>
+                  <a href="/auth/signout" class="dropdown-item">Sign Out</a>
+                </div>
+              </li>
+            {{else}}
+              <li class="nav-item">
+                <a href="/auth/signin" class="nav-link">Sign In</a>
+              </li>
+            {{/if}}
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <main role="main" class="container">
+      {{#each error}}
+        <div class="alert alert-danger" role="alert">
+          <p class="mb-3">{{ this.message }}</p>
+          {{#if this.debug }}
+            <pre class="alert-pre border bg-light p-2"><code>{{ this.debug }}</code></pre>
+          {{/if}}
+        </div>
+      {{/each}}
+
+      {{{body}}}
+    </main>
+  </body>
+</html>
