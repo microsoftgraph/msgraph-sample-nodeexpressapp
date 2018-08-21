@@ -40,12 +40,13 @@ Before moving on, install some additional gems that you will use later:
 - [connect-flash](https://github.com/jaredhanson/connect-flash) to flash error messages in the app.
 - [express-session](https://github.com/expressjs/session) to store values in an in-memory server-side session.
 - [passport-azure-ad](https://github.com/AzureAD/passport-azure-ad) for authenticating and getting access tokens.
+- [simple-oauth2](https://github.com/lelylan/simple-oauth2) for token management.
 - [microsoft-graph-client](https://github.com/microsoftgraph/msgraph-sdk-javascript) for making calls to Microsoft Graph.
 
 Run the following command in your CLI.
 
 ```Shell
-npm install dotenv connect-flash express-session passport-azure-ad @microsoft/microsoft-graph-client --save
+npm install dotenv connect-flash express-session passport-azure-ad simple-oauth2 @microsoft/microsoft-graph-client --save
 ```
 
 Now update the application to use the `connect-flash` and `express-session` middleware. Open the `./app.js` file and add the following `require` statement to the top of the file.
