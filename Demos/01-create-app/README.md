@@ -139,7 +139,7 @@ Start by creating the global layout for the app. Open the `./views/layout.hbs` f
                   {{/if}}
                 </a>
                 <div class="dropdown-menu dropdown-menu-right">
-                  <h5 class="dropdown-item-text mb-0">{{ user.name }}</h5>
+                  <h5 class="dropdown-item-text mb-0">{{ user.displayName }}</h5>
                   <p class="dropdown-item-text text-muted mb-0">{{ user.email }}</p>
                   <div class="dropdown-divider"></div>
                   <a href="/auth/signout" class="dropdown-item">Sign Out</a>
@@ -193,7 +193,7 @@ Now update the default page. Open the `./views/index.hbs` file and replace its c
   <h1>Node.js Graph Tutorial</h1>
   <p class="lead">This sample app shows how to use the Microsoft Graph API to access Outlook and OneDrive data from Node.js</p>
   {{#if user}}
-    <h4>Welcome {{ user.name }}!</h4>
+    <h4>Welcome {{ user.displayName }}!</h4>
     <p>Use the navigation bar at the top of the page to get started.</p>
   {{else}}
     <a href="/auth/signin" class="btn btn-primary btn-large">Click here to sign in</a>
