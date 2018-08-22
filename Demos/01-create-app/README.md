@@ -37,6 +37,7 @@ Open your browser and navigate to `http://localhost:3000`. If everything is work
 Before moving on, install some additional gems that you will use later:
 
 - [dotenv](https://github.com/motdotla/dotenv) for loading values from a .env file.
+- [moment](https://github.com/moment/moment/) for formatting date/time values.
 - [connect-flash](https://github.com/jaredhanson/connect-flash) to flash error messages in the app.
 - [express-session](https://github.com/expressjs/session) to store values in an in-memory server-side session.
 - [passport-azure-ad](https://github.com/AzureAD/passport-azure-ad) for authenticating and getting access tokens.
@@ -46,7 +47,7 @@ Before moving on, install some additional gems that you will use later:
 Run the following command in your CLI.
 
 ```Shell
-npm install dotenv connect-flash express-session passport-azure-ad simple-oauth2 @microsoft/microsoft-graph-client --save
+npm install dotenv moment connect-flash express-session passport-azure-ad simple-oauth2 @microsoft/microsoft-graph-client --save
 ```
 
 Now update the application to use the `connect-flash` and `express-session` middleware. Open the `./app.js` file and add the following `require` statement to the top of the file.
