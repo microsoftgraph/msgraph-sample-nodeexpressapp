@@ -25,7 +25,6 @@ router.get('/',
         });
       }
 
-
       if (accessToken && accessToken.length > 0) {
         try {
           // Get the events
