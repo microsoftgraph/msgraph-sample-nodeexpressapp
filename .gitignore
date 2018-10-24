@@ -62,3 +62,6 @@ typings/
 
 # VS Code settings
 .vscode/
+
+QSTemp/
+NodeExpressQuickStart.zip
