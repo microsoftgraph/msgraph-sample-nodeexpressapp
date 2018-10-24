@@ -1,0 +1,7 @@
+{
+  "sourceDirectory": ".\\Demos\\04-add-msgraph",
+  "exampleConfigFile": ".\\graph-tutorial\\.env.example",
+  "configFile": ".env",
+  "archiveFile": "NodeExpressQuickStart.zip",
+  "zipReadMe": ".\\graph-tutorial\\README.md"
+}
