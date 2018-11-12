@@ -1,177 +1,73 @@
-# Extend the Node.js Express app for Microsoft Graph
+# How to run the completed project
 
-In this demo you will incorporate the Microsoft Graph into the application. For this application, you will use the [microsoft-graph-client](https://github.com/microsoftgraph/msgraph-sdk-javascript) library to make calls to Microsoft Graph.
+## Prerequisites
 
-## Get calendar events from Outlook
+To run the completed project in this folder, you need the following:
 
-Start by adding a new method to the `./graph.js` file to get the events from the calendar. Add the following function inside the `module.exports` in `./graph.js`.
+- [Node.js](https://nodejs.org) installed on your development machine. If you do not have Node.js, visit the previous link for download options. (**Note:** This tutorial was written with Node version 10.7.0. The steps in this guide may work with other versions, but that has not been tested.)
+- Either a personal Microsoft account with a mailbox on Outlook.com, or a Microsoft work or school account.
 
-```js
-getEvents: async function(accessToken) {
-  const client = getAuthenticatedClient(accessToken);
+If you don't have a Microsoft account, there are a couple of options to get a free account:
 
-  const events = await client
-    .api('/me/events')
-    .select('subject,organizer,start,end')
-    .orderby('createdDateTime DESC')
-    .get();
+- You can [sign up for a new personal Microsoft account](https://signup.live.com/signup?wa=wsignin1.0&rpsnv=12&ct=1454618383&rver=6.4.6456.0&wp=MBI_SSL_SHARED&wreply=https://mail.live.com/default.aspx&id=64855&cbcxt=mai&bk=1454618383&uiflavor=web&uaid=b213a65b4fdc484382b6622b3ecaa547&mkt=E-US&lc=1033&lic=1).
+- You can [sign up for the Office 365 Developer Program](https://developer.microsoft.com/office/dev-program) to get a free Office 365 subscription.
 
-  return events;
-}
-```
+## Register a web application with the Application Registration Portal
 
-Consider what this code is doing.
+1. Open a browser and navigate to the [Application Registration Portal](https://apps.dev.microsoft.com). Login using a **personal account** (aka: Microsoft Account) or **Work or School Account**.
 
-- The URL that will be called is `/me/events`.
-- The `select` method limits the fields returned for each events to just those the view will actually use.
-- The `orderby` method sorts the results by the date and time they were created, with the most recent item being first.
+1. Select **Add an app** at the top of the page.
 
-Create a new file in the `./routes` directory named `calendar.js`, and add the following code.
+    > **Note:** If you see more than one **Add an app** button on the page, select the one that corresponds to the **Converged apps** list.
 
-```js
-var express = require('express');
-var router = express.Router();
-var tokens = require('../tokens.js');
-var graph = require('../graph.js');
+1. On the **Register your application** page, set the **Application Name** to **Node.js Graph Tutorial** and select **Create**.
 
-/* GET /calendar */
-router.get('/',
-  async function(req, res) {
-    if (!req.isAuthenticated()) {
-      // Redirect unauthenticated requests to home page
-      res.redirect('/')
-    } else {
-      let params = {
-        active: { calendar: true }
-      };
+    ![Screenshot of creating a new app in the App Registration Portal website](/Images/arp-create-app-01.png)
 
-      // Get the access token
-      var accessToken;
-      try {
-        accessToken = await tokens.getAccessToken(req);
-      } catch (err) {
-        res.json(err);
-      }
+1. On the **Node.js Graph Tutorial Registration** page, under the **Properties** section, copy the **Application Id** as you will need it later.
 
-      if (accessToken && accessToken.length > 0) {
-        try {
-          // Get the events
-          var events = await graph.getEvents(accessToken);
+    ![Screenshot of newly created application's ID](/Images/arp-create-app-02.png)
 
-          res.json(events.value);
-        } catch (err) {
-          res.json(err);
-        }
-      }
-    }
-  }
-);
+1. Scroll down to the **Application Secrets** section.
 
-module.exports = router;
-```
+    1. Select **Generate New Password**.
+    1. In the **New password generated** dialog, copy the contents of the box as you will need it later.
 
-Update `./app.js` to use this new route. Add the following line **before** the `var app = express();` line.
+        > **Important:** This password is never shown again, so make sure you copy it now.
 
-```js
-var calendarRouter = require('./routes/calendar');
-```
+    ![Screenshot of newly created application's password](/Images/arp-create-app-03.png)
 
-Then add the following line **after** the `app.use('/auth', authRouter);` line.
+1. Scroll down to the **Platforms** section.
 
-```js
-app.use('/calendar', calendarRouter);
-```
+    1. Select **Add Platform**.
+    1. In the **Add Platform** dialog, select **Web**.
 
-Now you can test this. Sign in and click the **Calendar** link in the nav bar. If everything works, you should see a JSON dump of events on the user's calendar.
+        ![Screenshot creating a platform for the app](/Images/arp-create-app-04.png)
 
-## Display the results
+    1. In the **Web** platform box, enter the URL `http://localhost:3000/auth/callback` for the **Redirect URLs**.
 
-Now you can add a view to display the results in a more user-friendly manner. First, add the following code in `./app.js` **after** the `app.set('view engine', 'hbs');` line.
+        ![Screenshot of the newly added Web platform for the application](/Images/arp-create-app-05.png)
 
-```js
-var hbs = require('hbs');
-var moment = require('moment');
-// Helper to format date/time sent by Graph
-hbs.registerHelper('eventDateTime', function(dateTime){
-  return moment(dateTime).format('M/D/YY h:mm A');
-});
-```
+1. Scroll to the bottom of the page and select **Save**.
 
-This implements a [Handlebars helper](http://handlebarsjs.com/#helpers) to format the ISO 8601 date returned by Microsoft Graph into something more human-friendly.
+## Configure the sample
 
-Create a new file in the `./views` directory named `calendar.hbs` and add the following code.
+1. Rename the `.env.example` file to `.env`.
+1. Edit the `.env` file and make the following changes.
+    1. Replace `YOUR_APP_ID_HERE` with the **Application Id** you got from the App Registration Portal.
+    1. Replace `YOUR_APP_PASSWORD_HERE` with the password you got from the App Registration Portal.
+1. In your command-line interface (CLI), navigate to this directory and run the following command to install requirements.
 
-```html
-<h1>Calendar</h1>
-<table class="table">
-  <thead>
-    <tr>
-      <th scope="col">Organizer</th>
-      <th scope="col">Subject</th>
-      <th scope="col">Start</th>
-      <th scope="col">End</th>
-    </tr>
-  </thead>
-  <tbody>
-    {{#each events}}
-      <tr>
-        <td>{{this.organizer.emailAddress.name}}</td>
-        <td>{{this.subject}}</td>
-        <td>{{eventDateTime this.start.dateTime}}</td>
-        <td>{{eventDateTime this.end.dateTime}}</td>
-      </tr>
-    {{/each}}
-  </tbody>
-</table>
-```
+    ```Shell
+    npm install
+    ```
 
-That will loop through a collection of events and add a table row for each one. Now update the route in `./routes/calendar.js` to use this view. Replace the existing route with the following code.
+## Run the sample
 
-```js
-router.get('/',
-  async function(req, res) {
-    if (!req.isAuthenticated()) {
-      // Redirect unauthenticated requests to home page
-      res.redirect('/')
-    } else {
-      let params = {
-        active: { calendar: true }
-      };
+1. Run the following command in your CLI to start the application.
 
-      // Get the access token
-      var accessToken;
-      try {
-        accessToken = await tokens.getAccessToken(req);
-      } catch (err) {
-        req.flash('error_msg', {
-          message: 'Could not get access token. Try signing out and signing in again.',
-          debug: JSON.stringify(err)
-        });
-      }
+    ```Shell
+    npm start
+    ```
 
-      if (accessToken && accessToken.length > 0) {
-        try {
-          // Get the events
-          var events = await graph.getEvents(accessToken);
-          params.events = events.value;
-        } catch (err) {
-          req.flash('error_msg', {
-            message: 'Could not fetch events',
-            debug: JSON.stringify(err)
-          });
-        }
-      }
-
-      res.render('calendar', params);
-    }
-  }
-);
-```
-
-Save your changes, restart the server, and sign in to the app. Click on the **Calendar** link and the app should now render a table of events.
-
-![A screenshot of the table of events](/Images/add-msgraph-01.png)
-
-## Next steps
-
-Now that you have a working app that calls Microsoft Graph, you can experiment and add new features. Visit the [Microsoft Graph documentation](https://developer.microsoft.com/graph/docs/concepts/overview) to see all of the data you can access with Microsoft Graph.
+1. Open a browser and browse to `http://localhost:3000`.
