@@ -39,7 +39,8 @@ Before moving on, install some additional gems that you will use later:
 Run the following command in your CLI.
 
 ```Shell
-npm install dotenv moment connect-flash express-session passport-azure-ad simple-oauth2 @microsoft/microsoft-graph-client --save
+npm install dotenv@6.1.0 moment@2.22.2 connect-flash@0.1.1 express-session@1.15.6
+npm install passport-azure-ad@4.0.0 simple-oauth2@2.2.1 @microsoft/microsoft-graph-client@1.3.0
 ```
 
 Now update the application to use the `connect-flash` and `express-session` middleware. Open the `./app.js` file and add the following `require` statement to the top of the file.
