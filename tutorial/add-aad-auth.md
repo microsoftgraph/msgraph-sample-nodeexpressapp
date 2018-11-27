@@ -1,6 +1,6 @@
-# Extend the Node.js Express app for Azure AD Authentication
+<!-- markdownlint-disable MD002 MD041 -->
 
-In this demo you will extend the application from the previous demo to support authentication with Azure AD. This is required to obtain the necessary OAuth access token to call the Microsoft Graph. In this step you will integrate the [passport-azure-ad](https://github.com/AzureAD/passport-azure-ad) library into the application.
+In this exercise you will extend the application from the previous exercise to support authentication with Azure AD. This is required to obtain the necessary OAuth access token to call the Microsoft Graph. In this step you will integrate the [passport-azure-ad](https://github.com/AzureAD/passport-azure-ad) library into the application.
 
 Create a new file named `.env` file in the root of your application, and add the following code.
 
@@ -17,7 +17,8 @@ OAUTH_TOKEN_ENDPOINT=/oauth2/v2.0/token
 
 Replace `YOUR APP ID HERE` with the application ID from the Application Registration Portal, and replace `YOUR APP SECRET HERE` with the password you generated.
 
-> **Important:** If you're using source control such as git, now would be a good time to exclude the `.env` file from source control to avoid inadvertently leaking your app ID and password.
+> [!IMPORTANT]
+> If you're using source control such as git, now would be a good time to exclude the `.env` file from source control to avoid inadvertently leaking your app ID and password.
 
 Open `./app.js` and add the following line to the top of the file to load the `.env` file.
 
@@ -320,11 +321,11 @@ router.post('/callback',
 
 Restart the server and go through the sign-in process. You should end up back on the home page, but the UI should change to indicate that you are signed-in.
 
-![A screenshot of the home page after signing in](/Images/add-aad-auth-01.png)
+![A screenshot of the home page after signing in](./images/add-aad-auth-01.png)
 
 Click the user avatar in the top right corner to access the **Sign Out** link. Clicking **Sign Out** resets the session and returns you to the home page.
 
-![A screenshot of the dropdown menu with the Sign Out link](/Images/add-aad-auth-02.png)
+![A screenshot of the dropdown menu with the Sign Out link](./images/add-aad-auth-02.png)
 
 ## Refreshing tokens
 
@@ -360,7 +361,3 @@ module.exports = {
 ```
 
 This method first checks if the access token is expired or close to expiring. If it is, then it uses the refresh token to get new tokens, then updates the cache and returns the new access token. You'll use this method whenever you need to get the access token out of storage.
-
-## Next steps
-
-Now that you've added authentication, you can continue to the next module, [Extend the Node.js Express app for Microsoft Graph](../04-add-msgraph/README.md).
