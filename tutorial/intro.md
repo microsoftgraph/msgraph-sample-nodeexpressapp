@@ -13,7 +13,7 @@ This tutorial teaches you how to build a Node.js Express web app that uses the M
 Before you start this demo, you should have [Node.js](https://nodejs.org) installed on your development machine. If you do not have Node.js, visit the previous link for download options.
 
 > [!NOTE]
-> This tutorial was written with Node version 10.7.0. The steps in this guide may work with other versions, but that has not been tested.
+> This tutorial was written with Node version 10.15.3. The steps in this guide may work with other versions, but that has not been tested.
 
 ## Feedback
 
