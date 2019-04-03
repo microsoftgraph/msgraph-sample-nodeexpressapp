@@ -39,9 +39,19 @@ Before moving on, install some additional gems that you will use later:
 Run the following command in your CLI.
 
 ```Shell
-npm install dotenv@6.1.0 moment@2.22.2 connect-flash@0.1.1 express-session@1.15.6
-npm install passport-azure-ad@4.0.0 simple-oauth2@2.2.1 @microsoft/microsoft-graph-client@1.3.0
+npm install dotenv@6.2.0 moment@2.24.0 connect-flash@0.1.1 express-session@1.15.6
+npm install passport-azure-ad@4.0.0 simple-oauth2@2.2.1 @microsoft/microsoft-graph-client@1.5.2
 ```
+
+>__WINDOWS USERS__
+>
+>If you get the following error message when trying to install these packages:
+>
+> `gyp ERR! stack Error: Can't find Python executable "python", you can set the PYTHON env variable.`
+>
+>Run the following command to install the Windows Build Tools using an elevated (Administrator) terminal window which installs the VS Build Tools and also Python
+>
+> `npm install --global --production windows-build-tools`
 
 Now update the application to use the `connect-flash` and `express-session` middleware. Open the `./app.js` file and add the following `require` statement to the top of the file.
 
