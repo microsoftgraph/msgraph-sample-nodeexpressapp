@@ -16,7 +16,7 @@ If you don't have a Microsoft account, there are a couple of options to get a fr
 
 1. Open a browser and navigate to the [Azure Active Directory admin center](https://aad.portal.azure.com). Login using a **personal account** (aka: Microsoft Account) or **Work or School Account**.
 
-1. Select **Azure Active Directory** in the left-hand navigation, then select **App registrations (Preview)** under **Manage**.
+1. Select **Azure Active Directory** in the left-hand navigation, then select **App registrations** under **Manage**.
 
     ![A screenshot of the App registrations ](/tutorial/images/aad-portal-app-registrations.png)
 
