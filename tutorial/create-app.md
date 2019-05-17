@@ -43,15 +43,18 @@ npm install dotenv@6.2.0 moment@2.24.0 connect-flash@0.1.1 express-session@1.15.
 npm install passport-azure-ad@4.0.0 simple-oauth2@2.2.1 @microsoft/microsoft-graph-client@1.5.2
 ```
 
->__WINDOWS USERS__
+> [!TIP]
+> Windows users may get the following error message when trying to install these packages on Windows.
 >
->If you get the following error message when trying to install these packages:
+> ```Shell
+> gyp ERR! stack Error: Can't find Python executable "python", you can set the PYTHON env variable.
+> ```
 >
-> `gyp ERR! stack Error: Can't find Python executable "python", you can set the PYTHON env variable.`
+> To resolve the error, run the following command to install the Windows Build Tools using an elevated (Administrator) terminal window which installs the VS Build Tools and Python.
 >
->Run the following command to install the Windows Build Tools using an elevated (Administrator) terminal window which installs the VS Build Tools and also Python
->
-> `npm install --global --production windows-build-tools`
+> ```Shell
+> npm install --global --production windows-build-tools
+> ```
 
 Now update the application to use the `connect-flash` and `express-session` middleware. Open the `./app.js` file and add the following `require` statement to the top of the file.
 
