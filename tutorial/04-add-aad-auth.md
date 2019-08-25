@@ -201,7 +201,7 @@ function getAuthenticatedClient(accessToken) {
 
 This exports the `getUserDetails` function, which uses the Microsoft Graph SDK to call the `/me` endpoint and return the result.
 
-Update the `signInComplete` method in `/app.s` to call this function. First, add the following `require` statements to the top of the file.
+Update the `signInComplete` method in `/app.js` to call this function. First, add the following `require` statements to the top of the file.
 
 ```js
 var graph = require('./graph');
