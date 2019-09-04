@@ -6,18 +6,18 @@
     "start": "node ./bin/www"
   },
   "dependencies": {
-    "@microsoft/microsoft-graph-client": "^1.6.0",
+    "@microsoft/microsoft-graph-client": "^1.7.0",
     "connect-flash": "^0.1.1",
-    "cookie-parser": "~1.4.3",
-    "debug": "^4.1.1",
-    "dotenv": "^8.0.0",
-    "express": "~4.16.0",
-    "express-session": "^1.16.1",
-    "hbs": "^4.0.4",
-    "http-errors": "^1.7.2",
+    "cookie-parser": "~1.4.4",
+    "debug": "~2.6.9",
+    "dotenv": "^8.1.0",
+    "express": "~4.16.1",
+    "express-session": "^1.16.2",
+    "hbs": "~4.0.4",
+    "http-errors": "~1.6.3",
     "moment": "^2.24.0",
-    "morgan": "~1.9.0",
-    "passport-azure-ad": "^4.0.0",
-    "simple-oauth2": "^2.2.1"
+    "morgan": "~1.9.1",
+    "passport-azure-ad": "^4.1.0",
+    "simple-oauth2": "^2.4.0"
   }
 }
