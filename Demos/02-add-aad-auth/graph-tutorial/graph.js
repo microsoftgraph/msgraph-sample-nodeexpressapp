@@ -1,4 +1,5 @@
 var graph = require('@microsoft/microsoft-graph-client');
+require('isomorphic-fetch');
 
 module.exports = {
   getUserDetails: async function(accessToken) {
