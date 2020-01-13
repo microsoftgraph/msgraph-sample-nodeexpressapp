@@ -9,10 +9,10 @@ OAUTH_APP_ID=YOUR_APP_ID_HERE
 OAUTH_APP_PASSWORD=YOUR_APP_PASSWORD_HERE
 OAUTH_REDIRECT_URI=http://localhost:3000/auth/callback
 OAUTH_SCOPES='profile offline_access user.read calendars.read'
-OAUTH_AUTHORITY=https://login.microsoftonline.com/common
-OAUTH_ID_METADATA=/v2.0/.well-known/openid-configuration
-OAUTH_AUTHORIZE_ENDPOINT=/oauth2/v2.0/authorize
-OAUTH_TOKEN_ENDPOINT=/oauth2/v2.0/token
+OAUTH_AUTHORITY=https://login.microsoftonline.com/common/
+OAUTH_ID_METADATA=v2.0/.well-known/openid-configuration
+OAUTH_AUTHORIZE_ENDPOINT=oauth2/v2.0/authorize
+OAUTH_TOKEN_ENDPOINT=oauth2/v2.0/token
 ```
 
 Replace `YOUR APP ID HERE` with the application ID from the Application Registration Portal, and replace `YOUR APP SECRET HERE` with the password you generated.
