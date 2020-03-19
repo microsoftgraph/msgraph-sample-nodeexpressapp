@@ -94,21 +94,7 @@ In this section you will implement the UI for the app.
 
 1. Open the `./routes/index.js` file and replace the existing code with the following.
 
-```js
-var express = require('express');
-var router = express.Router();
-
-/* GET home page. */
-router.get('/', function(req, res, next) {
-  let params = {
-    active: { home: true }
-  };
-
-  res.render('index', params);
-});
-
-module.exports = router;
-```
+    :::code language="javascript" source="../demo/graph-tutorial/routes/index.js" id="IndexRouterSnippet" highlight="6-10":::
 
 1. Save all of your changes and restart the server. Now, the app should look very different.
 
