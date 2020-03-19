@@ -242,7 +242,7 @@ However, storing just the access token doesn't allow you to check expiration or 
 
 1. Replace the existing `signInComplete` function with the following.
 
-    :::code language="javascript" source="../demo/graph-tutorial/app.js" id="SignInCompleteSnippet" highlight="17-18":::
+    :::code language="javascript" source="../demo/graph-tutorial/app.js" id="SignInCompleteSnippet" highlight="17-18, 21":::
 
 1. Replace the existing callback route in  `./routes/auth.js` with the following.
 
