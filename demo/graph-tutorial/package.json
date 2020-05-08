@@ -11,14 +11,14 @@
     "cookie-parser": "~1.4.4",
     "debug": "~2.6.9",
     "dotenv": "^8.2.0",
-    "express": "~4.16.1",
-    "express-session": "^1.17.0",
-    "hbs": "^4.1.0",
-    "http-errors": "~1.6.3",
+    "express": "^4.17.1",
+    "express-session": "^1.17.1",
+    "hbs": "^4.1.1",
+    "http-errors": "^1.7.3",
     "isomorphic-fetch": "^2.2.1",
-    "moment": "^2.24.0",
-    "morgan": "~1.9.1",
+    "moment": "^2.25.3",
+    "morgan": "^1.10.0",
     "passport-azure-ad": "^4.2.1",
-    "simple-oauth2": "^3.3.0"
+    "simple-oauth2": "^3.4.0"
   }
 }

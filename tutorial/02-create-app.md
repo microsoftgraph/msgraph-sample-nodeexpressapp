@@ -46,8 +46,8 @@ Before moving on, install some additional packages that you will use later:
 1. Run the following command in your CLI.
 
     ```Shell
-    npm install dotenv@8.2.0 moment@2.24.0 connect-flash@0.1.1 express-session@1.17.0 isomorphic-fetch@2.2.1
-    npm install passport-azure-ad@4.2.1 simple-oauth2@3.3.0 @microsoft/microsoft-graph-client@2.0.0
+    npm install dotenv@8.2.0 moment@2.25.3 connect-flash@0.1.1 express-session@1.17.1 isomorphic-fetch@2.2.1
+    npm install passport-azure-ad@4.2.1 simple-oauth2@3.4.0 @microsoft/microsoft-graph-client@2.0.0
     ```
 
     > [!TIP]
