@@ -85,7 +85,7 @@ passport.use(new OIDCStrategy(
     redirectUrl: `${process.env.ORIGIN_URL}/auth/callback`,
     allowHttpForRedirectUrl: true,
     clientSecret: process.env.OAUTH_APP_PASSWORD,
-    validateIssuer: false,
+    validateIssuer: false, // TODO this should be true in production.
     passReqToCallback: false,
     scope: process.env.OAUTH_SCOPES.split(' ')
   },
