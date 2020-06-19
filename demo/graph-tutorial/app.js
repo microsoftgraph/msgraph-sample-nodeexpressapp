@@ -82,7 +82,7 @@ passport.use(new OIDCStrategy(
     clientID: process.env.OAUTH_APP_ID,
     responseType: 'code id_token',
     responseMode: 'form_post',
-    redirectUrl: process.env.OAUTH_REDIRECT_URI,
+    redirectUrl: `${process.env.ORIGIN_URL}/auth/callback`,
     allowHttpForRedirectUrl: true,
     clientSecret: process.env.OAUTH_APP_PASSWORD,
     validateIssuer: false,
