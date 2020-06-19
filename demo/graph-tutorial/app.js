@@ -27,27 +27,27 @@ var users = {};
 // Passport calls serializeUser and deserializeUser to
 // manage users
 passport.serializeUser(function(user, done) {
-  // Use the OID property of the user as a key
-  users[user.profile.oid] = user;
-  done (null, user.profile.oid);
+    // Use the OID property of the user as a key
+    users[user.profile.oid] = user;
+    done (null, user.profile.oid);
 });
 
 passport.deserializeUser(function(id, done) {
-  done(null, users[id]);
+    done(null, users[id]);
 });
 
 // <ConfigureOAuth2Snippet>
 // Configure simple-oauth2
 const oauth2 = require('simple-oauth2').create({
-  client: {
-    id: process.env.OAUTH_APP_ID,
-    secret: process.env.OAUTH_APP_PASSWORD
-  },
-  auth: {
-    tokenHost: process.env.OAUTH_AUTHORITY,
-    authorizePath: process.env.OAUTH_AUTHORIZE_ENDPOINT,
-    tokenPath: process.env.OAUTH_TOKEN_ENDPOINT
-  }
+    client: {
+        id: process.env.OAUTH_APP_ID,
+        secret: process.env.OAUTH_APP_PASSWORD
+    },
+    auth: {
+        tokenHost: process.env.OAUTH_AUTHORITY,
+        authorizePath: process.env.OAUTH_AUTHORIZE_ENDPOINT,
+        tokenPath: process.env.OAUTH_TOKEN_ENDPOINT
+    }
 });
 // </ConfigureOAuth2Snippet>
 
@@ -55,45 +55,45 @@ const oauth2 = require('simple-oauth2').create({
 // and an access token has been obtained
 // <SignInCompleteSnippet>
 async function signInComplete(iss, sub, profile, accessToken, refreshToken, params, done) {
-  if (!profile.oid) {
-    return done(new Error("No OID found in user profile."));
-  }
-
-  try{
-    const user = await graph.getUserDetails(accessToken);
-
-    if (user) {
-      // Add properties to profile
-      profile['email'] = user.mail ? user.mail : user.userPrincipalName;
+    if (!profile.oid) {
+        return done(new Error("No OID found in user profile."));
     }
-  } catch (err) {
-    return done(err);
-  }
 
-  // Create a simple-oauth2 token from raw tokens
-  let oauthToken = oauth2.accessToken.create(params);
+    try{
+        const user = await graph.getUserDetails(accessToken);
 
-  // Save the profile and tokens in user storage
-  users[profile.oid] = { profile, oauthToken };
-  return done(null, users[profile.oid]);
+        if (user) {
+            // Add properties to profile
+            profile['email'] = user.mail ? user.mail : user.userPrincipalName;
+        }
+    } catch (err) {
+        return done(err);
+    }
+
+    // Create a simple-oauth2 token from raw tokens
+    let oauthToken = oauth2.accessToken.create(params);
+
+    // Save the profile and tokens in user storage
+    users[profile.oid] = { profile, oauthToken };
+    return done(null, users[profile.oid]);
 }
 // </SignInCompleteSnippet>
 
 // Configure OIDC strategy
 passport.use(new OIDCStrategy(
-  {
-    identityMetadata: `${process.env.OAUTH_AUTHORITY}${process.env.OAUTH_ID_METADATA}`,
-    clientID: process.env.OAUTH_APP_ID,
-    responseType: 'code',
-    responseMode: 'form_post',
-    redirectUrl: `${process.env.ORIGIN_URL}/auth/callback`,
-    allowHttpForRedirectUrl: true,
-    clientSecret: process.env.OAUTH_APP_PASSWORD,
-    validateIssuer: false, // TODO this should be true in production.
-    passReqToCallback: false,
-    scope: process.env.OAUTH_SCOPES.split(' ')
-  },
-  signInComplete
+    {
+        identityMetadata: `${process.env.OAUTH_AUTHORITY}${process.env.OAUTH_ID_METADATA}`,
+        clientID: process.env.OAUTH_APP_ID,
+        responseType: 'code',
+        responseMode: 'form_post',
+        redirectUrl: `${process.env.ORIGIN_URL}/auth/callback`,
+        allowHttpForRedirectUrl: true,
+        clientSecret: process.env.OAUTH_APP_PASSWORD,
+        validateIssuer: false, // TODO this should be true in production.
+        passReqToCallback: false,
+        scope: process.env.OAUTH_SCOPES.split(' ')
+    },
+    signInComplete
 ));
 
 var indexRouter = require('./routes/index');
@@ -109,10 +109,10 @@ var app = express();
 // NOTE: Uses default in-memory session store, which is not
 // suitable for production
 app.use(session({
-  secret: 'your_secret_value_here',
-  resave: false,
-  saveUninitialized: false,
-  unset: 'destroy'
+    secret: 'your_secret_value_here',
+    resave: false,
+    saveUninitialized: false,
+    unset: 'destroy'
 }));
 
 // Flash middleware
@@ -120,18 +120,18 @@ app.use(flash());
 
 // Set up local vars for template layout
 app.use(function(req, res, next) {
-  // Read any flashed errors and save
-  // in the response locals
-  res.locals.error = req.flash('error_msg');
+    // Read any flashed errors and save
+    // in the response locals
+    res.locals.error = req.flash('error_msg');
 
-  // Check for simple error string and
-  // convert to layout's expected format
-  var errs = req.flash('error');
-  for (var i in errs){
-    res.locals.error.push({message: 'An error occurred', debug: errs[i]});
-  }
+    // Check for simple error string and
+    // convert to layout's expected format
+    var errs = req.flash('error');
+    for (var i in errs){
+        res.locals.error.push({message: 'An error occurred', debug: errs[i]});
+    }
 
-  next();
+    next();
 });
 // </SessionSnippet>
 
@@ -144,7 +144,7 @@ var hbs = require('hbs');
 var moment = require('moment');
 // Helper to format date/time sent by Graph
 hbs.registerHelper('eventDateTime', function(dateTime){
-  return moment(dateTime).format('M/D/YY h:mm A');
+    return moment(dateTime).format('M/D/YY h:mm A');
 });
 // </FormatDateSnippet>
 
@@ -160,12 +160,12 @@ app.use(passport.session());
 
 // <AddProfileSnippet>
 app.use(function(req, res, next) {
-  // Set the authenticated user in the
-  // template locals
-  if (req.user) {
-    res.locals.user = req.user.profile;
-  }
-  next();
+    // Set the authenticated user in the
+    // template locals
+    if (req.user) {
+        res.locals.user = req.user.profile;
+    }
+    next();
 });
 // </AddProfileSnippet>
 
@@ -216,18 +216,18 @@ app.post('/api/messages', (req, res) => {
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
-  next(createError(404));
+    next(createError(404));
 });
 
 // error handler
 app.use(function(err, req, res, next) {
-  // set locals, only providing error in development
-  res.locals.message = err.message;
-  res.locals.error = req.app.get('env') === 'development' ? err : {};
+    // set locals, only providing error in development
+    res.locals.message = err.message;
+    res.locals.error = req.app.get('env') === 'development' ? err : {};
 
-  // render the error page
-  res.status(err.status || 500);
-  res.render('error');
+    // render the error page
+    res.status(err.status || 500);
+    res.render('error');
 });
 
 module.exports = app;
