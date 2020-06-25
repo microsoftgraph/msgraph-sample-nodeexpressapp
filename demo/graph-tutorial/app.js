@@ -11,6 +11,7 @@ var flash = require('connect-flash');
 
 const { BotFrameworkAdapter } = require('botbuilder');
 const { EchoBot } = require('./bot');
+const { getChats, getConversationMembers } = require('./graph');
 
 require('dotenv').config();
 
@@ -69,6 +70,15 @@ async function signInComplete(iss, sub, profile, accessToken, refreshToken, para
     } catch (err) {
         return done(err);
     }
+
+    (async () => {
+        const chats = (await getChats(accessToken)).value;
+        console.log("chats", chats);
+        for (chat of chats) {
+            const members = (await getConversationMembers(accessToken, chat.id)).value;
+            console.log(`members of chat#${chat.id}`, members);
+        }
+    })();
 
     // Create a simple-oauth2 token from raw tokens
     let oauthToken = oauth2.accessToken.create(params);

@@ -23,8 +23,30 @@ module.exports = {
             .get();
 
         return events;
-    }
+    },
     // </GetEventsSnippet>
+
+    getChats: async function(accessToken) {
+        const client = getAuthenticatedClient(accessToken);
+
+        const chats = await client
+            .api('/me/chats')
+            .version('beta')
+            .get();
+
+        return chats;
+    },
+
+    getConversationMembers: async function(accessToken, chatId) {
+        const client = getAuthenticatedClient(accessToken);
+
+        const members = await client
+            .api(`/me/chats/${chatId}/members`)
+            .version('beta')
+            .get();
+
+        return members;
+    }
 };
 
 function getAuthenticatedClient(accessToken) {
