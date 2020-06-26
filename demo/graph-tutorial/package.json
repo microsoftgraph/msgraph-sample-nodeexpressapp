@@ -3,7 +3,8 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "node ./src/bin/www"
+    "start": "node ./src/bin/www",
+    "manifest": "zip manifest.zip manifest.json icon/outline.png icon/color.png"
   },
   "dependencies": {
     "@microsoft/microsoft-graph-client": "^2.0.0",
