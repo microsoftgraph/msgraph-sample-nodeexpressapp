@@ -3,7 +3,7 @@
 
 require('dotenv').config();
 
-const { ActivityHandler } = require('botbuilder');
+const { ActivityHandler, TurnContext } = require('botbuilder');
 
 class EchoBot extends ActivityHandler {
     constructor() {
@@ -11,6 +11,9 @@ class EchoBot extends ActivityHandler {
         // See https://aka.ms/about-bot-activity-message to learn more about the message and other activity types.
         this.onMessage(async (context, next) => {
             await context.sendActivity(`You said **${ context.activity.text.toUpperCase() }** at ${new Date()}`);
+
+            const conversationReference = TurnContext.getConversationReference(context.activity);
+            console.log(JSON.stringify(conversationReference));
 
             // By calling next() you ensure that the next BotHandler is run.
             await next();
