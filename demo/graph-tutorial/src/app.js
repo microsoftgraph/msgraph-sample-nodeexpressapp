@@ -11,7 +11,7 @@ var flash = require('connect-flash');
 
 const { BotFrameworkAdapter } = require('botbuilder');
 const { EchoBot } = require('./bot');
-const { getChats, getConversationMembers } = require('./graph');
+const { getChats, getConversationMembers, getChatMessages } = require('./graph');
 
 require('dotenv').config();
 
@@ -76,7 +76,9 @@ async function signInComplete(iss, sub, profile, accessToken, refreshToken, para
         console.log("chats", chats);
         for (chat of chats) {
             const members = (await getConversationMembers(accessToken, chat.id)).value;
-            console.log(`members of chat#${chat.id}`, members);
+            console.log(`members of chat#${chat.id}: ${JSON.stringify(members)}`);
+            const messages = (await getChatMessages(accessToken, chat.id)).value;
+            console.log(`messages of chat#${chat.id}: ${JSON.stringify(messages)}`);
         }
     })();
 

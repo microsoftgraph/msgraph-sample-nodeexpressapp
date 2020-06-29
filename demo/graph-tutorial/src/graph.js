@@ -46,6 +46,17 @@ module.exports = {
             .get();
 
         return members;
+    },
+
+    getChatMessages: async function(accessToken, chatId) {
+        const client = getAuthenticatedClient(accessToken);
+
+        const members = await client
+            .api(`/me/chats/${chatId}/messages`)
+            .version('beta')
+            .get();
+
+        return members;
     }
 };
 

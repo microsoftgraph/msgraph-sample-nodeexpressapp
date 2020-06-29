@@ -13,7 +13,8 @@ class EchoBot extends ActivityHandler {
             await context.sendActivity(`You said **${ context.activity.text.toUpperCase() }** at ${new Date()}`);
 
             const conversationReference = TurnContext.getConversationReference(context.activity);
-            console.log(JSON.stringify(conversationReference));
+            console.log("conversationReference", JSON.stringify(conversationReference));
+            console.log("context", JSON.stringify(context));
 
             // By calling next() you ensure that the next BotHandler is run.
             await next();
