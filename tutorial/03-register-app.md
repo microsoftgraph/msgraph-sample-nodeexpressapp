@@ -34,3 +34,9 @@ In this exercise, you will create a new Azure AD web application registration us
     > This client secret is never shown again, so make sure you copy it now.
 
     ![A screenshot of the newly added client secret](./images/aad-copy-client-secret.png)
+
+1. Select **API permissions** under **Manage**. Select the **Add a permission button**. Select **Microsoft Graph**
+and then **Delegated permissions**. Expand the **Calendars** and **User** nodes and check the **Calendars.Read** and **User.Read** permissions. Select the **Add permissions** button.
+
+    ![A screenshot of the Add a permission dialog](./images/aad-calendars-permission.png)
+    ![A screenshot of the Add a permission dialog](./images/aad-user-permission.png)
