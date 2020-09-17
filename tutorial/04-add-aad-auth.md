@@ -6,7 +6,7 @@ In this exercise you will extend the application from the previous exercise to s
 
     :::code language="ini" source="../demo/graph-tutorial/.env.example":::
 
-    Replace `YOUR APP ID HERE` with the application ID from the Application Registration Portal, and replace `YOUR APP SECRET HERE` with the password you generated.
+    Replace `YOUR APP ID HERE` with the application ID from the Application Registration Portal, and replace `YOUR APP SECRET HERE` with the client secret you generated.
 
     > [!IMPORTANT]
     > If you're using source control such as git, now would be a good time to exclude the `.env` file from source control to avoid inadvertently leaking your app ID and password.
