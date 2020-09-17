@@ -22,6 +22,12 @@ In this exercise you will use [Express](http://expressjs.com/) to build a web ap
     npm audit fix
     ```
 
+1. Run the following command to update the version of Express and other dependencies.
+
+    ```Shell
+    npm install express@4.17.1 http-errors@1.8.0 morgan@1.10.0 debug@4.1.1
+    ```
+
 1. Use the following command to start a local web server.
 
     ```Shell
@@ -38,16 +44,15 @@ Before moving on, install some additional packages that you will use later:
 - [moment](https://github.com/moment/moment/) for formatting date/time values.
 - [connect-flash](https://github.com/jaredhanson/connect-flash) to flash error messages in the app.
 - [express-session](https://github.com/expressjs/session) to store values in an in-memory server-side session.
-- [passport-azure-ad](https://github.com/AzureAD/passport-azure-ad) for authenticating and getting access tokens.
-- [simple-oauth2](https://github.com/lelylan/simple-oauth2) for token management.
+- [msal-node](https://github.com/AzureAD/microsoft-authentication-library-for-js/tree/dev/lib/msal-node) for authenticating and getting access tokens.
 - [microsoft-graph-client](https://github.com/microsoftgraph/msgraph-sdk-javascript) for making calls to Microsoft Graph.
 - [isomorphic-fetch](https://github.com/matthew-andrews/isomorphic-fetch) to polyfill the fetch for Node. A fetch polyfill is required for the `microsoft-graph-client` library. See the [Microsoft Graph JavaScript client library wiki](https://github.com/microsoftgraph/msgraph-sdk-javascript/wiki/Migration-from-1.x.x-to-2.x.x#polyfill-only-when-required) for more information.
 
 1. Run the following command in your CLI.
 
     ```Shell
-    npm install dotenv@8.2.0 moment@2.25.3 connect-flash@0.1.1 express-session@1.17.1 isomorphic-fetch@2.2.1
-    npm install passport-azure-ad@4.2.1 simple-oauth2@3.4.0 @microsoft/microsoft-graph-client@2.0.0
+    npm install dotenv@8.2.0 moment@2.28.0 connect-flash@0.1.1 express-session@1.17.1 isomorphic-fetch@2.2.1
+    npm install @azure/msal-node@1.0.0-alpha.5 @microsoft/microsoft-graph-client@2.0.0
     ```
 
     > [!TIP]
