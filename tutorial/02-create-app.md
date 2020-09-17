@@ -44,7 +44,9 @@ Before moving on, install some additional packages that you will use later:
 - [moment](https://github.com/moment/moment/) for formatting date/time values.
 - [connect-flash](https://github.com/jaredhanson/connect-flash) to flash error messages in the app.
 - [express-session](https://github.com/expressjs/session) to store values in an in-memory server-side session.
+- [express-promise-router](https://github.com/express-promise-router/express-promise-router) to allow route handlers to return a Promise.
 - [msal-node](https://github.com/AzureAD/microsoft-authentication-library-for-js/tree/dev/lib/msal-node) for authenticating and getting access tokens.
+- [uuid](https://github.com/uuidjs/uuid) used by msal-node to generate GUIDs.
 - [microsoft-graph-client](https://github.com/microsoftgraph/msgraph-sdk-javascript) for making calls to Microsoft Graph.
 - [isomorphic-fetch](https://github.com/matthew-andrews/isomorphic-fetch) to polyfill the fetch for Node. A fetch polyfill is required for the `microsoft-graph-client` library. See the [Microsoft Graph JavaScript client library wiki](https://github.com/microsoftgraph/msgraph-sdk-javascript/wiki/Migration-from-1.x.x-to-2.x.x#polyfill-only-when-required) for more information.
 
@@ -71,8 +73,9 @@ Before moving on, install some additional packages that you will use later:
 1. Update the application to use the `connect-flash` and `express-session` middleware. Open the `./app.js` file and add the following `require` statement to the top of the file.
 
     ```javascript
-    var session = require('express-session');
-    var flash = require('connect-flash');
+    const session = require('express-session');
+    const flash = require('connect-flash');
+    const msal = require('@azure/msal-node');
     ```
 
 1. Add the following code immediately after the `var app = express();` line.

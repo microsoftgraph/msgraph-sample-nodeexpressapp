@@ -1,15 +1,49 @@
+// Copyright (c) Microsoft Corporation.
+// Licensed under the MIT License.
+
 var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-var session = require('express-session');
-var flash = require('connect-flash');
+const session = require('express-session');
+const flash = require('connect-flash');
+const msal = require('@azure/msal-node');
+require('dotenv').config();
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+var authRouter = require('./routes/auth');
 
 var app = express();
+
+// <MsalInitSnippet>
+// In-memory storage of logged-in users
+// For demo purposes only, production apps should store
+// this in a reliable storage
+app.locals.users = {};
+
+// MSAL config
+const msalConfig = {
+  auth: {
+    clientId: process.env.OAUTH_APP_ID,
+    authority: process.env.OAUTH_AUTHORITY,
+    clientSecret: process.env.OAUTH_APP_SECRET
+  },
+  system: {
+    loggerOptions: {
+      loggerCallback(loglevel, message, containsPii) {
+        console.log(message);
+      },
+      piiLoggingEnabled: false,
+      logLevel: msal.LogLevel.Verbose,
+    }
+  }
+};
+
+// Create msal application object
+app.locals.msalClient = new msal.ConfidentialClientApplication(msalConfig);
+// </MsalInitSnippet>
 
 // <SessionSnippet>
 // Session middleware
@@ -38,6 +72,12 @@ app.use(function(req, res, next) {
     res.locals.error.push({message: 'An error occurred', debug: errs[i]});
   }
 
+  // Check for an authenticated user and load
+  // into response locals
+  if (req.session.userId) {
+    res.locals.user = app.locals.users[req.session.userId];
+  }
+
   next();
 });
 // </SessionSnippet>
@@ -53,6 +93,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
+app.use('/auth', authRouter);
 app.use('/users', usersRouter);
 
 // catch 404 and forward to error handler
