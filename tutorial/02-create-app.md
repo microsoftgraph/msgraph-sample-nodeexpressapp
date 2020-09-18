@@ -42,6 +42,7 @@ Before moving on, install some additional packages that you will use later:
 
 - [dotenv](https://github.com/motdotla/dotenv) for loading values from a .env file.
 - [moment](https://github.com/moment/moment/) for formatting date/time values.
+- [windows-iana](https://github.com/rubenillodo/windows-iana) for translating Windows time zone names to IANA time zone IDs.
 - [connect-flash](https://github.com/jaredhanson/connect-flash) to flash error messages in the app.
 - [express-session](https://github.com/expressjs/session) to store values in an in-memory server-side session.
 - [express-promise-router](https://github.com/express-promise-router/express-promise-router) to allow route handlers to return a Promise.
@@ -53,8 +54,8 @@ Before moving on, install some additional packages that you will use later:
 1. Run the following command in your CLI.
 
     ```Shell
-    npm install dotenv@8.2.0 moment@2.28.0 connect-flash@0.1.1 express-session@1.17.1 isomorphic-fetch@2.2.1
-    npm install @azure/msal-node@1.0.0-alpha.5 @microsoft/microsoft-graph-client@2.0.0
+    npm install dotenv@8.2.0 moment@2.28.0 moment-timezone@0.5.31 connect-flash@0.1.1 express-session@1.17.1 isomorphic-fetch@2.2.1
+    npm install @azure/msal-node@1.0.0-alpha.5 @microsoft/microsoft-graph-client@2.0.0 windows-iana@4.2.1
     ```
 
     > [!TIP]

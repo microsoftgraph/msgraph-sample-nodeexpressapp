@@ -21,7 +21,7 @@ router.get('/signin',
       console.log(`Error: ${error}`);
       req.flash('error_msg', {
         message: 'Error getting auth URL',
-        debug: JSON.stringify(error)
+        debug: JSON.stringify(error, Object.getOwnPropertyNames(error))
       });
       res.redirect('/');
     }
@@ -49,12 +49,13 @@ router.get('/callback',
       // Add the user to user storage
       req.app.locals.users[req.session.userId] = {
         displayName: user.displayName,
-        email: user.mail || user.userPrincipalName
+        email: user.mail || user.userPrincipalName,
+        timeZone: user.mailboxSettings.timeZone
       };
     } catch(error) {
       req.flash('error_msg', {
         message: 'Error completing authentication',
-        debug: JSON.stringify(error)
+        debug: JSON.stringify(error, Object.getOwnPropertyNames(error))
       });
     }
 

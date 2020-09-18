@@ -47,7 +47,7 @@ In this exercise you will extend the application from the previous exercise to s
           console.log(`Error: ${error}`);
           req.flash('error_msg', {
             message: 'Error getting auth URL',
-            debug: JSON.stringify(error)
+            debug: JSON.stringify(error, Object.getOwnPropertyNames(error))
           });
           res.redirect('/');
         }
@@ -75,7 +75,7 @@ In this exercise you will extend the application from the previous exercise to s
         } catch (error) {
           req.flash('error_msg', {
             message: 'Error completing authentication',
-            debug: JSON.stringify(error)
+            debug: JSON.stringify(error, Object.getOwnPropertyNames(error))
           });
         }
 
@@ -148,10 +148,10 @@ Start the server and browse to `https://localhost:3000`. Click the sign-in butto
 
         const user = await client
           .api('/me')
-          .select('displayName,mail,userPrincipalName')
+          .select('displayName,mail,mailboxSettings,userPrincipalName')
           .get();
         return user;
-      }
+      },
     };
 
     function getAuthenticatedClient(accessToken) {
