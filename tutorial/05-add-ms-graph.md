@@ -6,7 +6,7 @@ In this exercise you will incorporate Microsoft Graph into the application. For 
 
 1. Open `./graph.js` and add the following function inside `module.exports`.
 
-    :::code language="javascript" source="../demo/graph-tutorial/graph.js" id="GetEventsSnippet":::
+    :::code language="javascript" source="../demo/graph-tutorial/graph.js" id="GetCalendarViewSnippet":::
 
     Consider what this code is doing.
 
@@ -21,6 +21,8 @@ In this exercise you will incorporate Microsoft Graph into the application. For 
     const graph = require('../graph.js');
     const moment = require('moment-timezone');
     const iana = require('windows-iana');
+    const { body, validationResult } = require('express-validator');
+    const validator = require('validator');
 
     /* GET /calendar */
     router.get('/',
@@ -132,7 +134,7 @@ Now you can add a view to display the results in a more user-friendly manner.
 
 1. Now update the route in `./routes/calendar.js` to use this view. Replace the existing route with the following code.
 
-    :::code language="javascript" source="../demo/graph-tutorial/routes/calendar.js" id="GetRouteSnippet" highlight="32-35,48,50-53,60":::
+    :::code language="javascript" source="../demo/graph-tutorial/routes/calendar.js" id="GetRouteSnippet" highlight="33-36,49,51-54,61":::
 
 1. Save your changes, restart the server, and sign in to the app. Click on the **Calendar** link and the app should now render a table of events.
 

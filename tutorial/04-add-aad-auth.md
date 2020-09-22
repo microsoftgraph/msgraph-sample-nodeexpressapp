@@ -178,7 +178,7 @@ Start the server and browse to `https://localhost:3000`. Click the sign-in butto
 
 1. Replace the existing callback route with the following code.
 
-    :::code language="javascript" source="../demo/graph-tutorial/routes/auth.js" id="CallbackSnippet" highlight="13-22":::
+    :::code language="javascript" source="../demo/graph-tutorial/routes/auth.js" id="CallbackSnippet" highlight="13-23":::
 
     The new code saves the user's account ID in the session, gets the user's details from Microsoft Graph, and saves it in the app's user storage.
 

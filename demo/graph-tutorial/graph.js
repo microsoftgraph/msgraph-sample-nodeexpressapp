@@ -75,7 +75,7 @@ module.exports = {
     await client
       .api('/me/events')
       .post(newEvent);
-  }
+  },
   // </CreateEventSnippet>
 };
 
