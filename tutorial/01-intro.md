@@ -23,16 +23,6 @@ You should also have either a personal Microsoft account with a mailbox on Outlo
 > [!NOTE]
 > This tutorial was written with Node version 12.18.4. The steps in this guide may work with other versions, but that has not been tested.
 
-## Watch the tutorial
-
-This module has been recorded and is available in the Office Development YouTube channel.
-
-<!-- markdownlint-disable MD033 MD034 -->
-<br/>
-
-> [!VIDEO https://www.youtube-nocookie.com/embed/n6q8Cm-pTYY]
-<!-- markdownlint-enable MD033 MD034 -->
-
 ## Feedback
 
 Please provide any feedback on this tutorial in the [GitHub repository](https://github.com/microsoftgraph/msgraph-training-nodeexpressapp).
