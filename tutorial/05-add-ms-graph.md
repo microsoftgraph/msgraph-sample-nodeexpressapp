@@ -4,7 +4,7 @@ In this exercise you will incorporate Microsoft Graph into the application. For 
 
 ## Get calendar events from Outlook
 
-1. Open `./graph.js` and add the following function inside `module.exports`.
+1. Open **./graph.js** and add the following function inside `module.exports`.
 
     :::code language="javascript" source="../demo/graph-tutorial/graph.js" id="GetCalendarViewSnippet":::
 
@@ -14,7 +14,7 @@ In this exercise you will incorporate Microsoft Graph into the application. For 
     - The `select` method limits the fields returned for each events to just those the view will actually use.
     - The `orderby` method sorts the results by the date and time they were created, with the most recent item being first.
 
-1. Create a new file in the `./routes` directory named `calendar.js`, and add the following code.
+1. Create a new file in the **./routes** directory named **calendar.js**, and add the following code.
 
     ```javascript
     const router = require('express-promise-router')();
@@ -102,7 +102,7 @@ In this exercise you will incorporate Microsoft Graph into the application. For 
     module.exports = router;
     ```
 
-1. Update `./app.js` to use this new route. Add the following line **before** the `var app = express();` line.
+1. Update **./app.js** to use this new route. Add the following line **before** the `var app = express();` line.
 
     ```javascript
     var calendarRouter = require('./routes/calendar');
@@ -120,19 +120,19 @@ In this exercise you will incorporate Microsoft Graph into the application. For 
 
 Now you can add a view to display the results in a more user-friendly manner.
 
-1. Add the following code in `./app.js` **after** the `app.set('view engine', 'hbs');` line.
+1. Add the following code in **./app.js after** the `app.set('view engine', 'hbs');` line.
 
     :::code language="javascript" source="../demo/graph-tutorial/app.js" id="FormatDateSnippet":::
 
     This implements a [Handlebars helper](http://handlebarsjs.com/#helpers) to format the ISO 8601 date returned by Microsoft Graph into something more human-friendly.
 
-1. Create a new file in the `./views` directory named `calendar.hbs` and add the following code.
+1. Create a new file in the **./views** directory named **calendar.hbs** and add the following code.
 
     :::code language="html" source="../demo/graph-tutorial/views/calendar.hbs" id="LayoutSnippet":::
 
     That will loop through a collection of events and add a table row for each one.
 
-1. Now update the route in `./routes/calendar.js` to use this view. Replace the existing route with the following code.
+1. Now update the route in **./routes/calendar.js** to use this view. Replace the existing route with the following code.
 
     :::code language="javascript" source="../demo/graph-tutorial/routes/calendar.js" id="GetRouteSnippet" highlight="33-36,49,51-54,61":::
 

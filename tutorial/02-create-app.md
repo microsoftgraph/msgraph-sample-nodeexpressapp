@@ -72,7 +72,7 @@ Before moving on, install some additional packages that you will use later:
     > npm install --global --production windows-build-tools
     > ```
 
-1. Update the application to use the `connect-flash` and `express-session` middleware. Open the `./app.js` file and add the following `require` statement to the top of the file.
+1. Update the application to use the `connect-flash` and `express-session` middleware. Open **./app.js** and add the following `require` statement to the top of the file.
 
     ```javascript
     const session = require('express-session');
@@ -88,21 +88,21 @@ Before moving on, install some additional packages that you will use later:
 
 In this section you will implement the UI for the app.
 
-1. Open the `./views/layout.hbs` file and replace the entire contents with the following code.
+1. Open **./views/layout.hbs** and replace the entire contents with the following code.
 
     :::code language="html" source="../demo/graph-tutorial/views/layout.hbs" id="LayoutSnippet":::
 
     This code adds [Bootstrap](http://getbootstrap.com/) for simple styling, and [Font Awesome](https://fontawesome.com/) for some simple icons. It also defines a global layout with a nav bar.
 
-1. Open `./public/stylesheets/style.css` and replace its entire contents with the following.
+1. Open **./public/stylesheets/style.css** and replace its entire contents with the following.
 
     :::code language="css" source="../demo/graph-tutorial/public/stylesheets/style.css":::
 
-1. Open the `./views/index.hbs` file and replace its contents with the following.
+1. Open **./views/index.hbs** and replace its contents with the following.
 
     :::code language="html" source="../demo/graph-tutorial/views/index.hbs" id="IndexSnippet":::
 
-1. Open the `./routes/index.js` file and replace the existing code with the following.
+1. Open **./routes/index.js** and replace the existing code with the following.
 
     :::code language="javascript" source="../demo/graph-tutorial/routes/index.js" id="IndexRouterSnippet" highlight="6-10":::
 

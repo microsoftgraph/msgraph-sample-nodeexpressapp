@@ -2,16 +2,16 @@
 
 In this exercise you will extend the application from the previous exercise to support authentication with Azure AD. This is required to obtain the necessary OAuth access token to call the Microsoft Graph. In this step you will integrate the [msal-node](https://github.com/AzureAD/microsoft-authentication-library-for-js/tree/dev/lib/msal-node) library into the application.
 
-1. Create a new file named `.env` file in the root of your application, and add the following code.
+1. Create a new file named **.env** in the root of your application, and add the following code.
 
     :::code language="ini" source="../demo/graph-tutorial/example.env":::
 
     Replace `YOUR_APP_ID_HERE` with the application ID from the Application Registration Portal, and replace `YOUR_APP_SECRET_HERE` with the client secret you generated.
 
     > [!IMPORTANT]
-    > If you're using source control such as git, now would be a good time to exclude the `.env` file from source control to avoid inadvertently leaking your app ID and password.
+    > If you're using source control such as git, now would be a good time to exclude the **.env** file from source control to avoid inadvertently leaking your app ID and password.
 
-1. Open `./app.js` and add the following line to the top of the file to load the `.env` file.
+1. Open **./app.js** and add the following line to the top of the file to load the **.env** file.
 
     ```javascript
     require('dotenv').config();
@@ -19,13 +19,13 @@ In this exercise you will extend the application from the previous exercise to s
 
 ## Implement sign-in
 
-1. Locate the line `var indexRouter = require('./routes/index');` in `./app.js`. Insert the following code **before** that line.
+1. Locate the line `var indexRouter = require('./routes/index');` in **./app.js**. Insert the following code **before** that line.
 
     :::code language="javascript" source="../demo/graph-tutorial/app.js" id="MsalInitSnippet":::
 
     This code initializes the msal-node library with the app ID and password for the app.
 
-1. Create a new file in the `./routes` directory named `auth.js` and add the following code.
+1. Create a new file in the **./routes** directory named **auth.js** and add the following code.
 
     ```javascript
     var router = require('express-promise-router')();
@@ -116,11 +116,11 @@ In this exercise you will extend the application from the previous exercise to s
 
     The `signin` route calls the `getAuthCodeUrl` function to generate the login URL, then redirects the browser to that URL.
 
-    The `callback` route is where Azure redirects after the signin is complete. The code calls the `acquireTokenByCode` function to exchange the authorization code for an access token. Once the token is obtained, it redirects back to the home page with the access token in the temporary error value. We'll use this to verify that our sign-in is working before moving on. Before we test, we need to configure the Express app to use the new router from `./routes/auth.js`.
+    The `callback` route is where Azure redirects after the signin is complete. The code calls the `acquireTokenByCode` function to exchange the authorization code for an access token. Once the token is obtained, it redirects back to the home page with the access token in the temporary error value. We'll use this to verify that our sign-in is working before moving on. Before we test, we need to configure the Express app to use the new router from **./routes/auth.js**.
 
     The `signout` method logs the user out and destroys the session.
 
-1. Open `./app.js` and insert the following code **before** the `var app = express();` line.
+1. Open **./app.js** and insert the following code **before** the `var app = express();` line.
 
     ```javascript
     var authRouter = require('./routes/auth');
@@ -136,7 +136,7 @@ Start the server and browse to `https://localhost:3000`. Click the sign-in butto
 
 ### Get user details
 
-1. Create a new file in the root of the project named `graph.js` and add the following code.
+1. Create a new file in the root of the project named **graph.js** and add the following code.
 
     ```javascript
     var graph = require('@microsoft/microsoft-graph-client');
@@ -170,7 +170,7 @@ Start the server and browse to `https://localhost:3000`. Click the sign-in butto
 
     This exports the `getUserDetails` function, which uses the Microsoft Graph SDK to call the `/me` endpoint and return the result.
 
-1. Open `/auth.js` and add the following `require` statements to the top of the file.
+1. Open **./routes/auth.js** and add the following `require` statements to the top of the file.
 
     ```javascript
     var graph = require('../graph');
