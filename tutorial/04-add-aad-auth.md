@@ -4,7 +4,7 @@ In this exercise you will extend the application from the previous exercise to s
 
 1. Create a new file named `.env` file in the root of your application, and add the following code.
 
-    :::code language="ini" source="../demo/graph-tutorial/.env.example":::
+    :::code language="ini" source="../demo/graph-tutorial/example.env":::
 
     Replace `YOUR_APP_ID_HERE` with the application ID from the Application Registration Portal, and replace `YOUR_APP_SECRET_HERE` with the client secret you generated.
 
