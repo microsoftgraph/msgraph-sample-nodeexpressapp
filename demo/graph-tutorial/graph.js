@@ -36,6 +36,47 @@ module.exports = {
     return events;
   },
   // </GetCalendarViewSnippet>
+
+  // <CreateEventSnippet>
+  createEvent: async function(accessToken, formData, timeZone) {
+    const client = getAuthenticatedClient(accessToken);
+
+    // Build a Graph event
+    const newEvent = {
+      subject: formData.subject,
+      start: {
+        dateTime: formData.start,
+        timeZone: timeZone
+      },
+      end: {
+        dateTime: formData.end,
+        timeZone: timeZone
+      },
+      body: {
+        contentType: 'text',
+        content: formData.body
+      }
+    };
+
+    // Add attendees if present
+    if (formData.attendees) {
+      newEvent.attendees = [];
+      formData.attendees.forEach(attendee => {
+        newEvent.attendees.push({
+          type: 'required',
+          emailAddress: {
+            address: attendee
+          }
+        });
+      });
+    }
+
+    // POST /me/events
+    await client
+      .api('/me/events')
+      .post(newEvent);
+  }
+  // </CreateEventSnippet>
 };
 
 function getAuthenticatedClient(accessToken) {

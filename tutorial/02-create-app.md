@@ -46,6 +46,7 @@ Before moving on, install some additional packages that you will use later:
 - [connect-flash](https://github.com/jaredhanson/connect-flash) to flash error messages in the app.
 - [express-session](https://github.com/expressjs/session) to store values in an in-memory server-side session.
 - [express-promise-router](https://github.com/express-promise-router/express-promise-router) to allow route handlers to return a Promise.
+- [express-validator](https://github.com/express-validator/express-validator) for parsing and validating form data.
 - [msal-node](https://github.com/AzureAD/microsoft-authentication-library-for-js/tree/dev/lib/msal-node) for authenticating and getting access tokens.
 - [uuid](https://github.com/uuidjs/uuid) used by msal-node to generate GUIDs.
 - [microsoft-graph-client](https://github.com/microsoftgraph/msgraph-sdk-javascript) for making calls to Microsoft Graph.
@@ -55,7 +56,7 @@ Before moving on, install some additional packages that you will use later:
 
     ```Shell
     npm install dotenv@8.2.0 moment@2.28.0 moment-timezone@0.5.31 connect-flash@0.1.1 express-session@1.17.1 isomorphic-fetch@2.2.1
-    npm install @azure/msal-node@1.0.0-alpha.5 @microsoft/microsoft-graph-client@2.0.0 windows-iana@4.2.1
+    npm install @azure/msal-node@1.0.0-alpha.5 @microsoft/microsoft-graph-client@2.0.0 windows-iana@4.2.1 express-validator@6.6.1
     ```
 
     > [!TIP]
