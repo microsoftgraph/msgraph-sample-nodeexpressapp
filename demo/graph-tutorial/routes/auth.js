@@ -65,11 +65,11 @@ router.get('/callback',
 // </CallbackSnippet>
 
 router.get('/signout',
-  function(req, res) {
+  async function(req, res) {
     // Sign out
     if (req.session.userId) {
       // Look up the user's account in the cache
-      const accounts = req.app.locals.msalClient
+      const accounts = await req.app.locals.msalClient
         .getTokenCache()
         .getAllAccounts();
 
