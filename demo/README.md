@@ -32,10 +32,6 @@ If you don't have a Microsoft account, there are a couple of options to get a fr
 
     ![A screenshot of the application ID of the new app registration](/tutorial/images/aad-application-id.png)
 
-1. Select **Authentication** under **Manage**. Locate the **Implicit grant** section and enable **ID tokens**. Choose **Save**.
-
-    ![A screenshot of the Implicit grant section](/tutorial/images/aad-implicit-grant.png)
-
 1. Select **Certificates & secrets** under **Manage**. Select the **New client secret** button. Enter a value in **Description** and select one of the options for **Expires** and choose **Add**.
 
     ![A screenshot of the Add a client secret dialog](/tutorial/images/aad-new-client-secret.png)
@@ -49,7 +45,7 @@ If you don't have a Microsoft account, there are a couple of options to get a fr
 
 ## Configure the sample
 
-1. Rename the `.env.example` file to `.env`.
+1. Rename the `example.env` file to `.env`.
 1. Edit the `.env` file and make the following changes.
     1. Replace `YOUR_APP_ID_HERE` with the **Application Id** you got from the App Registration Portal.
     1. Replace `YOUR_APP_PASSWORD_HERE` with the password you got from the App Registration Portal.

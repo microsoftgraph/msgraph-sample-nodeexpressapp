@@ -6,19 +6,23 @@
     "start": "node ./bin/www"
   },
   "dependencies": {
-    "@microsoft/microsoft-graph-client": "^2.0.0",
+    "@azure/msal-node": "^1.0.0-beta.0",
+    "@microsoft/microsoft-graph-client": "^2.1.1",
     "connect-flash": "^0.1.1",
     "cookie-parser": "~1.4.4",
-    "debug": "~2.6.9",
+    "debug": "^4.2.0",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
+    "express-promise-router": "^4.0.1",
     "express-session": "^1.17.1",
+    "express-validator": "^6.6.1",
     "hbs": "^4.1.1",
-    "http-errors": "^1.7.3",
-    "isomorphic-fetch": "^2.2.1",
-    "moment": "^2.25.3",
+    "http-errors": "^1.8.0",
+    "isomorphic-fetch": "^3.0.0",
+    "moment": "^2.29.1",
+    "moment-timezone": "^0.5.31",
     "morgan": "^1.10.0",
-    "passport-azure-ad": "^4.2.1",
-    "simple-oauth2": "^3.4.0"
+    "uuid": "^8.3.1",
+    "windows-iana": "^4.2.1"
   }
 }

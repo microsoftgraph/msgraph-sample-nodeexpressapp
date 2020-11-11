@@ -22,6 +22,12 @@ In this exercise you will use [Express](http://expressjs.com/) to build a web ap
     npm audit fix
     ```
 
+1. Run the following command to update the version of Express and other dependencies.
+
+    ```Shell
+    npm install express@4.17.1 http-errors@1.8.0 morgan@1.10.0 debug@4.1.1
+    ```
+
 1. Use the following command to start a local web server.
 
     ```Shell
@@ -36,18 +42,21 @@ Before moving on, install some additional packages that you will use later:
 
 - [dotenv](https://github.com/motdotla/dotenv) for loading values from a .env file.
 - [moment](https://github.com/moment/moment/) for formatting date/time values.
+- [windows-iana](https://github.com/rubenillodo/windows-iana) for translating Windows time zone names to IANA time zone IDs.
 - [connect-flash](https://github.com/jaredhanson/connect-flash) to flash error messages in the app.
 - [express-session](https://github.com/expressjs/session) to store values in an in-memory server-side session.
-- [passport-azure-ad](https://github.com/AzureAD/passport-azure-ad) for authenticating and getting access tokens.
-- [simple-oauth2](https://github.com/lelylan/simple-oauth2) for token management.
+- [express-promise-router](https://github.com/express-promise-router/express-promise-router) to allow route handlers to return a Promise.
+- [express-validator](https://github.com/express-validator/express-validator) for parsing and validating form data.
+- [msal-node](https://github.com/AzureAD/microsoft-authentication-library-for-js/tree/dev/lib/msal-node) for authenticating and getting access tokens.
+- [uuid](https://github.com/uuidjs/uuid) used by msal-node to generate GUIDs.
 - [microsoft-graph-client](https://github.com/microsoftgraph/msgraph-sdk-javascript) for making calls to Microsoft Graph.
 - [isomorphic-fetch](https://github.com/matthew-andrews/isomorphic-fetch) to polyfill the fetch for Node. A fetch polyfill is required for the `microsoft-graph-client` library. See the [Microsoft Graph JavaScript client library wiki](https://github.com/microsoftgraph/msgraph-sdk-javascript/wiki/Migration-from-1.x.x-to-2.x.x#polyfill-only-when-required) for more information.
 
 1. Run the following command in your CLI.
 
     ```Shell
-    npm install dotenv@8.2.0 moment@2.25.3 connect-flash@0.1.1 express-session@1.17.1 isomorphic-fetch@2.2.1
-    npm install passport-azure-ad@4.2.1 simple-oauth2@3.4.0 @microsoft/microsoft-graph-client@2.0.0
+    npm install dotenv@8.2.0 moment@2.29.1 moment-timezone@0.5.31 connect-flash@0.1.1 express-session@1.17.1 isomorphic-fetch@3.0.0
+    npm install @azure/msal-node@1.0.0-beta.0 @microsoft/microsoft-graph-client@2.1.1 windows-iana@4.2.1 express-validator@6.6.1 uuid@8.3.1
     ```
 
     > [!TIP]
@@ -63,11 +72,12 @@ Before moving on, install some additional packages that you will use later:
     > npm install --global --production windows-build-tools
     > ```
 
-1. Update the application to use the `connect-flash` and `express-session` middleware. Open the `./app.js` file and add the following `require` statement to the top of the file.
+1. Update the application to use the `connect-flash` and `express-session` middleware. Open **./app.js** and add the following `require` statement to the top of the file.
 
     ```javascript
-    var session = require('express-session');
-    var flash = require('connect-flash');
+    const session = require('express-session');
+    const flash = require('connect-flash');
+    const msal = require('@azure/msal-node');
     ```
 
 1. Add the following code immediately after the `var app = express();` line.
@@ -78,21 +88,21 @@ Before moving on, install some additional packages that you will use later:
 
 In this section you will implement the UI for the app.
 
-1. Open the `./views/layout.hbs` file and replace the entire contents with the following code.
+1. Open **./views/layout.hbs** and replace the entire contents with the following code.
 
     :::code language="html" source="../demo/graph-tutorial/views/layout.hbs" id="LayoutSnippet":::
 
     This code adds [Bootstrap](http://getbootstrap.com/) for simple styling, and [Font Awesome](https://fontawesome.com/) for some simple icons. It also defines a global layout with a nav bar.
 
-1. Open `./public/stylesheets/style.css` and replace its entire contents with the following.
+1. Open **./public/stylesheets/style.css** and replace its entire contents with the following.
 
     :::code language="css" source="../demo/graph-tutorial/public/stylesheets/style.css":::
 
-1. Open the `./views/index.hbs` file and replace its contents with the following.
+1. Open **./views/index.hbs** and replace its contents with the following.
 
     :::code language="html" source="../demo/graph-tutorial/views/index.hbs" id="IndexSnippet":::
 
-1. Open the `./routes/index.js` file and replace the existing code with the following.
+1. Open **./routes/index.js** and replace the existing code with the following.
 
     :::code language="javascript" source="../demo/graph-tutorial/routes/index.js" id="IndexRouterSnippet" highlight="6-10":::
 
