@@ -179,20 +179,24 @@ router.post('/new', [
 
 async function getAccessToken(userId, msalClient) {
   // Look up the user's account in the cache
-  const accounts = msalClient
-    .getTokenCache()
-    .getAllAccounts();
+  try {
+    const accounts = await msalClient
+      .getTokenCache()
+      .getAllAccounts();
 
-  const userAccount = accounts.find(a => a.homeAccountId === userId);
+    const userAccount = accounts.find(a => a.homeAccountId === userId);
 
-  // Get the token silently
-  const response = await msalClient.acquireTokenSilent({
-    scopes: process.env.OAUTH_SCOPES.split(','),
-    redirectUri: process.env.OAUTH_REDIRECT_URI,
-    account: userAccount
-  });
+    // Get the token silently
+    const response = await msalClient.acquireTokenSilent({
+      scopes: process.env.OAUTH_SCOPES.split(','),
+      redirectUri: process.env.OAUTH_REDIRECT_URI,
+      account: userAccount
+    });
 
-  return response.accessToken;
+    return response.accessToken;
+  } catch (err) {
+    console.log(JSON.stringify(err, Object.getOwnPropertyNames(err)));
+  }
 }
 
 module.exports = router;
