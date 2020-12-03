@@ -10,9 +10,12 @@ In this exercise you will incorporate Microsoft Graph into the application. For 
 
     Consider what this code is doing.
 
-    - The URL that will be called is `/me/events`.
+    - The URL that will be called is `/me/calendarview`.
+    - The `header` method adds the `Prefer: outlook.timezone` header to the request, causing the start and end times to be returned in the user's time zone.
+    - The `query` method sets the `startDateTime` and `endDateTime` parameters for the calendar view.
     - The `select` method limits the fields returned for each events to just those the view will actually use.
-    - The `orderby` method sorts the results by the date and time they were created, with the most recent item being first.
+    - The `orderby` method sorts the results by the start time.
+    - The `top` method limits the results to 50 events.
 
 1. Create a new file in the **./routes** directory named **calendar.js**, and add the following code.
 
