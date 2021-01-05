@@ -19,7 +19,7 @@ In this exercise you will extend the application from the previous exercise to s
 
 ## Implement sign-in
 
-1. Locate the line `var indexRouter = require('./routes/index');` in **./app.js**. Insert the following code **before** that line.
+1. Locate the line `var app = express();` in **./app.js**. Insert the following code **after** that line.
 
     :::code language="javascript" source="../demo/graph-tutorial/app.js" id="MsalInitSnippet":::
 
