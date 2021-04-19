@@ -21,7 +21,7 @@ You should also have either a personal Microsoft account with a mailbox on Outlo
 - You can [sign up for the Office 365 Developer Program](https://developer.microsoft.com/office/dev-program) to get a free Office 365 subscription.
 
 > [!NOTE]
-> This tutorial was written with Node version 12.18.4. The steps in this guide may work with other versions, but that has not been tested.
+> This tutorial was written with Node version 14.15.0. The steps in this guide may work with other versions, but that has not been tested.
 
 ## Feedback
 
