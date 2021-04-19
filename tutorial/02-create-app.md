@@ -25,7 +25,7 @@ In this exercise you will use [Express](http://expressjs.com/) to build a web ap
 1. Run the following command to update the version of Express and other dependencies.
 
     ```Shell
-    npm install express@4.17.1 http-errors@1.8.0 morgan@1.10.0 debug@4.1.1
+    npm install express@4.17.1 http-errors@1.8.0 morgan@1.10.0 debug@4.3.1 hbs@4.1.2
     ```
 
 1. Use the following command to start a local web server.
@@ -41,22 +41,22 @@ In this exercise you will use [Express](http://expressjs.com/) to build a web ap
 Before moving on, install some additional packages that you will use later:
 
 - [dotenv](https://github.com/motdotla/dotenv) for loading values from a .env file.
-- [moment](https://github.com/moment/moment/) for formatting date/time values.
+- [date-fns](https://github.com/date-fns/date-fns) for formatting date/time values.
 - [windows-iana](https://github.com/rubenillodo/windows-iana) for translating Windows time zone names to IANA time zone IDs.
 - [connect-flash](https://github.com/jaredhanson/connect-flash) to flash error messages in the app.
 - [express-session](https://github.com/expressjs/session) to store values in an in-memory server-side session.
 - [express-promise-router](https://github.com/express-promise-router/express-promise-router) to allow route handlers to return a Promise.
 - [express-validator](https://github.com/express-validator/express-validator) for parsing and validating form data.
 - [msal-node](https://github.com/AzureAD/microsoft-authentication-library-for-js/tree/dev/lib/msal-node) for authenticating and getting access tokens.
-- [uuid](https://github.com/uuidjs/uuid) used by msal-node to generate GUIDs.
 - [microsoft-graph-client](https://github.com/microsoftgraph/msgraph-sdk-javascript) for making calls to Microsoft Graph.
 - [isomorphic-fetch](https://github.com/matthew-andrews/isomorphic-fetch) to polyfill the fetch for Node. A fetch polyfill is required for the `microsoft-graph-client` library. See the [Microsoft Graph JavaScript client library wiki](https://github.com/microsoftgraph/msgraph-sdk-javascript/wiki/Migration-from-1.x.x-to-2.x.x#polyfill-only-when-required) for more information.
 
 1. Run the following command in your CLI.
 
     ```Shell
-    npm install dotenv@8.2.0 moment@2.29.1 moment-timezone@0.5.31 connect-flash@0.1.1 express-session@1.17.1 express-promise-router@4.0.1 isomorphic-fetch@3.0.0
-    npm install @azure/msal-node@1.0.0-beta.0 @microsoft/microsoft-graph-client@2.1.1 windows-iana@4.2.1 express-validator@6.6.1 uuid@8.3.1
+    npm install dotenv@8.2.0 date-fns@2.21.1 date-fns-tz@1.1.4 connect-flash@0.1.1 express-validator@6.10.0
+    npm install express-session@1.17.1 express-promise-router@4.1.0 isomorphic-fetch@3.0.0
+    npm install @azure/msal-node@1.0.2 @microsoft/microsoft-graph-client@2.2.1 windows-iana@5.0.1
     ```
 
     > [!TIP]

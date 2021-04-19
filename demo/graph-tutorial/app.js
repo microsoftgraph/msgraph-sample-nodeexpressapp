@@ -89,10 +89,12 @@ app.set('view engine', 'hbs');
 
 // <FormatDateSnippet>
 var hbs = require('hbs');
-var moment = require('moment');
+var parseISO = require('date-fns/parseISO');
+var formatDate = require('date-fns/format');
 // Helper to format date/time sent by Graph
-hbs.registerHelper('eventDateTime', function(dateTime){
-  return moment(dateTime).format('M/D/YY h:mm A');
+hbs.registerHelper('eventDateTime', function(dateTime) {
+  const date = parseISO(dateTime);
+  return formatDate(date, 'M/d/yy h:mm a');
 });
 // </FormatDateSnippet>
 
