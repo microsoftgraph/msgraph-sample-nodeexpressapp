@@ -44,7 +44,10 @@ router.get('/callback',
       // Save the user's homeAccountId in their session
       req.session.userId = response.account.homeAccountId;
 
-      const user = await graph.getUserDetails(response.accessToken);
+      const user = await graph.getUserDetails(
+        req.app.locals.msalClient,
+        req.session.userId
+      );
 
       // Add the user to user storage
       req.app.locals.users[req.session.userId] = {

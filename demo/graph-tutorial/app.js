@@ -1,22 +1,22 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
-var createError = require('http-errors');
-var express = require('express');
-var path = require('path');
-var cookieParser = require('cookie-parser');
-var logger = require('morgan');
+const createError = require('http-errors');
+const express = require('express');
+const path = require('path');
+const cookieParser = require('cookie-parser');
+const logger = require('morgan');
 const session = require('express-session');
 const flash = require('connect-flash');
 const msal = require('@azure/msal-node');
 require('dotenv').config();
 
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
-var authRouter = require('./routes/auth');
-var calendarRouter = require('./routes/calendar');
+const indexRouter = require('./routes/index');
+const usersRouter = require('./routes/users');
+const authRouter = require('./routes/auth');
+const calendarRouter = require('./routes/calendar');
 
-var app = express();
+const app = express();
 
 // <MsalInitSnippet>
 // In-memory storage of logged-in users
@@ -27,9 +27,9 @@ app.locals.users = {};
 // MSAL config
 const msalConfig = {
   auth: {
-    clientId: process.env.OAUTH_APP_ID,
+    clientId: process.env.OAUTH_CLIENT_ID,
     authority: process.env.OAUTH_AUTHORITY,
-    clientSecret: process.env.OAUTH_APP_SECRET
+    clientSecret: process.env.OAUTH_CLIENT_SECRET
   },
   system: {
     loggerOptions: {

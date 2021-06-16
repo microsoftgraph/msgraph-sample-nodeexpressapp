@@ -6,22 +6,25 @@
     "start": "node ./bin/www"
   },
   "dependencies": {
-    "@azure/msal-node": "^1.0.2",
-    "@microsoft/microsoft-graph-client": "^2.2.1",
+    "@azure/msal-node": "^1.1.0",
+    "@microsoft/microsoft-graph-client": "^3.0.0-Preview.2",
     "connect-flash": "^0.1.1",
     "cookie-parser": "~1.4.4",
-    "date-fns": "^2.21.1",
+    "date-fns": "^2.22.1",
     "date-fns-tz": "^1.1.4",
     "debug": "^4.3.1",
-    "dotenv": "^8.2.0",
+    "dotenv": "^10.0.0",
     "express": "^4.17.1",
     "express-promise-router": "^4.1.0",
-    "express-session": "^1.17.1",
-    "express-validator": "^6.10.0",
+    "express-session": "^1.17.2",
+    "express-validator": "^6.12.0",
     "hbs": "^4.1.2",
     "http-errors": "^1.8.0",
     "isomorphic-fetch": "^3.0.0",
     "morgan": "^1.10.0",
-    "windows-iana": "^5.0.1"
+    "windows-iana": "^5.0.2"
+  },
+  "devDependencies": {
+    "prettier": "2.3.1"
   }
 }

@@ -7,12 +7,9 @@
   <head>
     <title>Node.js Graph Tutorial</title>
 
-    <link rel="stylesheet"
-      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
-      integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"
-      crossorigin="anonymous">
-    <link rel="stylesheet"
-      href="https://use.fontawesome.com/releases/v5.12.1/css/all.css"
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x"
       crossorigin="anonymous">
     <link rel='stylesheet' href='/stylesheets/style.css' />
   </head>
@@ -26,7 +23,7 @@
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarCollapse">
-          <ul class="navbar-nav mr-auto">
+          <ul class="navbar-nav me-auto">
             <li class="nav-item">
               <a href="/" class="nav-link{{#if active.home}} active{{/if}}">Home</a>
             </li>
@@ -38,21 +35,19 @@
           </ul>
           <ul class="navbar-nav justify-content-end">
             <li class="nav-item">
-              <a class="nav-link" href="https://developer.microsoft.com/graph/docs/concepts/overview" target="_blank">
-                <i class="fas fa-external-link-alt mr-1"></i>Docs
-              </a>
+              <a class="nav-link" href="https://docs.microsoft.com/graph/overview" target="_blank">Docs</a>
             </li>
             {{#if user}}
               <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true"
+                <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true"
                   aria-expanded="false">
                   {{#if user.avatar}}
-                    <img src="{{ user.avatar }}" class="rounded-circle align-self-center mr-2" style="width: 32px;">
+                    <img src="{{ user.avatar }}" class="rounded-circle align-self-center me-2" style="width: 32px;">
                   {{else}}
-                    <i class="far fa-user-circle fa-lg rounded-circle align-self-center mr-2" style="width: 32px;"></i>
+                    <img src="/images/no-profile-photo.png" class="rounded-circle align-self-center me-2" style="width: 32px;">
                   {{/if}}
                 </a>
-                <div class="dropdown-menu dropdown-menu-right">
+                <div class="dropdown-menu dropdown-menu-end">
                   <h5 class="dropdown-item-text mb-0">{{ user.displayName }}</h5>
                   <p class="dropdown-item-text text-muted mb-0">{{ user.email }}</p>
                   <div class="dropdown-divider"></div>
@@ -81,18 +76,9 @@
       {{{body}}}
     </main>
 
-    <!-- Bootstrap/jQuery -->
-  <script
-    src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
-    integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
-    crossorigin="anonymous"></script>
-  <script
-    src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
-    integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
-    crossorigin="anonymous"></script>
-  <script
-    src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
-    integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
+    <!-- Bootstrap -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4"
     crossorigin="anonymous"></script>
   </body>
 </html>
