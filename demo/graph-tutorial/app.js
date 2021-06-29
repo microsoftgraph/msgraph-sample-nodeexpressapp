@@ -27,9 +27,9 @@ app.locals.users = {};
 // MSAL config
 const msalConfig = {
   auth: {
-    clientId: process.env.OAUTH_APP_ID,
+    clientId: process.env.OAUTH_CLIENT_ID,
     authority: process.env.OAUTH_AUTHORITY,
-    clientSecret: process.env.OAUTH_APP_SECRET
+    clientSecret: process.env.OAUTH_CLIENT_SECRET
   },
   system: {
     loggerOptions: {
