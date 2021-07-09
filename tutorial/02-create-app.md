@@ -5,7 +5,7 @@ In this exercise you will use [Express](http://expressjs.com/) to build a web ap
 1. Open your CLI, navigate to a directory where you have rights to create files, and run the following command to create a new Express app that uses [Handlebars](http://handlebarsjs.com/) as the rendering engine.
 
     ```Shell
-    npx express-generator@4.16.1 --hbs graph-tutorial
+    npx express-generator --hbs graph-tutorial
     ```
 
     The Express generator creates a new directory called `graph-tutorial` and scaffolds an Express app.
@@ -50,13 +50,14 @@ Before moving on, install some additional packages that you will use later:
 - [msal-node](https://github.com/AzureAD/microsoft-authentication-library-for-js/tree/dev/lib/msal-node) for authenticating and getting access tokens.
 - [microsoft-graph-client](https://github.com/microsoftgraph/msgraph-sdk-javascript) for making calls to Microsoft Graph.
 - [isomorphic-fetch](https://github.com/matthew-andrews/isomorphic-fetch) to polyfill the fetch for Node. A fetch polyfill is required for the `microsoft-graph-client` library. See the [Microsoft Graph JavaScript client library wiki](https://github.com/microsoftgraph/msgraph-sdk-javascript/wiki/Migration-from-1.x.x-to-2.x.x#polyfill-only-when-required) for more information.
+- [qs](https://github.com/ljharb/qs) to build URL query strings.
 
 1. Run the following command in your CLI.
 
     ```Shell
-    npm install dotenv@8.2.0 date-fns@2.21.1 date-fns-tz@1.1.4 connect-flash@0.1.1 express-validator@6.10.0
-    npm install express-session@1.17.1 express-promise-router@4.1.0 isomorphic-fetch@3.0.0
-    npm install @azure/msal-node@1.0.2 @microsoft/microsoft-graph-client@2.2.1 windows-iana@5.0.1
+    npm install dotenv@10.0.0 date-fns@2.22.1 date-fns-tz@1.1.4 connect-flash@0.1.1 express-validator@6.12.0
+    npm install express-session@1.17.2 express-promise-router@4.1.0 isomorphic-fetch@3.0.0
+    npm install @azure/msal-node@1.1.0 @microsoft/microsoft-graph-client@3.0.0-Preview.2 windows-iana@5.0.2
     ```
 
     > [!TIP]
@@ -92,7 +93,7 @@ In this section you will implement the UI for the app.
 
     :::code language="html" source="../demo/graph-tutorial/views/layout.hbs" id="LayoutSnippet":::
 
-    This code adds [Bootstrap](http://getbootstrap.com/) for simple styling, and [Font Awesome](https://fontawesome.com/) for some simple icons. It also defines a global layout with a nav bar.
+    This code adds [Bootstrap](http://getbootstrap.com/) for simple styling. It also defines a global layout with a nav bar.
 
 1. Open **./public/stylesheets/style.css** and replace its entire contents with the following.
 
@@ -105,6 +106,8 @@ In this section you will implement the UI for the app.
 1. Open **./routes/index.js** and replace the existing code with the following.
 
     :::code language="javascript" source="../demo/graph-tutorial/routes/index.js" id="IndexRouterSnippet" highlight="6-10":::
+
+1. Add an image file of your choosing named **no-profile-photo.png** in the **./public/images** directory. This image will be used as the user's photo when the user has no photo in Microsoft Graph.
 
 1. Save all of your changes and restart the server. Now, the app should look very different.
 

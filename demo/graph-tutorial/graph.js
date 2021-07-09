@@ -5,8 +5,8 @@ var graph = require('@microsoft/microsoft-graph-client');
 require('isomorphic-fetch');
 
 module.exports = {
-  getUserDetails: async function(accessToken) {
-    const client = getAuthenticatedClient(accessToken);
+  getUserDetails: async function(msalClient, userId) {
+    const client = getAuthenticatedClient(msalClient, userId);
 
     const user = await client
       .api('/me')
@@ -16,8 +16,8 @@ module.exports = {
   },
 
   // <GetCalendarViewSnippet>
-  getCalendarView: async function(accessToken, start, end, timeZone) {
-    const client = getAuthenticatedClient(accessToken);
+  getCalendarView: async function(msalClient, userId, start, end, timeZone) {
+    const client = getAuthenticatedClient(msalClient, userId);
 
     const events = await client
       .api('/me/calendarview')
@@ -38,8 +38,8 @@ module.exports = {
   // </GetCalendarViewSnippet>
 
   // <CreateEventSnippet>
-  createEvent: async function(accessToken, formData, timeZone) {
-    const client = getAuthenticatedClient(accessToken);
+  createEvent: async function(msalClient, userId, formData, timeZone) {
+    const client = getAuthenticatedClient(msalClient, userId);
 
     // Build a Graph event
     const newEvent = {
@@ -79,13 +79,41 @@ module.exports = {
   // </CreateEventSnippet>
 };
 
-function getAuthenticatedClient(accessToken) {
+function getAuthenticatedClient(msalClient, userId) {
+  if (!msalClient || !userId) {
+    throw new Error(
+      `Invalid MSAL state. Client: ${msalClient ? 'present' : 'missing'}, User ID: ${userId ? 'present' : 'missing'}`);
+  }
+
   // Initialize Graph client
   const client = graph.Client.init({
-    // Use the provided access token to authenticate
-    // requests
-    authProvider: (done) => {
-      done(null, accessToken);
+    // Implement an auth provider that gets a token
+    // from the app's MSAL instance
+    authProvider: async (done) => {
+      try {
+        // Get the user's account
+        const account = await msalClient
+          .getTokenCache()
+          .getAccountByHomeId(userId);
+
+        if (account) {
+          // Attempt to get the token silently
+          // This method uses the token cache and
+          // refreshes expired tokens as needed
+          const response = await msalClient.acquireTokenSilent({
+            scopes: process.env.OAUTH_SCOPES.split(','),
+            redirectUri: process.env.OAUTH_REDIRECT_URI,
+            account: account
+          });
+
+          // First param to callback is the error,
+          // Set to null in success case
+          done(null, response.accessToken);
+        }
+      } catch (err) {
+        console.log(JSON.stringify(err, Object.getOwnPropertyNames(err)));
+        done(err, null);
+      }
     }
   });
 

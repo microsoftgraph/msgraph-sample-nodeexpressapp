@@ -56,57 +56,22 @@ In this exercise you will incorporate Microsoft Graph into the application. For 
           var weekEnd = addDays(weekStart, 7);
           console.log(`Start: ${formatISO(weekStart)}`);
 
-          // Get the access token
-          var accessToken;
           try {
-            accessToken = await getAccessToken(req.session.userId, req.app.locals.msalClient);
+            // Get the events
+            const events = await graph.getCalendarView(
+              req.app.locals.msalClient,
+              req.session.userId,
+              formatISO(weekStart),
+              formatISO(weekEnd),
+              user.timeZone);
+
+            res.json(events.value);
           } catch (err) {
             res.send(JSON.stringify(err, Object.getOwnPropertyNames(err)));
-            return;
-          }
-
-          if (accessToken && accessToken.length > 0) {
-            try {
-              // Get the events
-              const events = await graph.getCalendarView(
-                accessToken,
-                formatISO(weekStart),
-                formatISO(weekEnd),
-                user.timeZone);
-
-              res.json(events.value);
-            } catch (err) {
-              res.send(JSON.stringify(err, Object.getOwnPropertyNames(err)));
-            }
-          }
-          else {
-            req.flash('error_msg', 'Could not get an access token');
           }
         }
       }
     );
-
-    async function getAccessToken(userId, msalClient) {
-      // Look up the user's account in the cache
-      try {
-        const accounts = await msalClient
-          .getTokenCache()
-          .getAllAccounts();
-
-        const userAccount = accounts.find(a => a.homeAccountId === userId);
-
-        // Get the token silently
-        const response = await msalClient.acquireTokenSilent({
-          scopes: process.env.OAUTH_SCOPES.split(','),
-          redirectUri: process.env.OAUTH_REDIRECT_URI,
-          account: userAccount
-        });
-
-        return response.accessToken;
-      } catch (err) {
-        console.log(JSON.stringify(err, Object.getOwnPropertyNames(err)));
-      }
-    }
 
     module.exports = router;
     ```
@@ -114,7 +79,7 @@ In this exercise you will incorporate Microsoft Graph into the application. For 
 1. Update **./app.js** to use this new route. Add the following line **before** the `var app = express();` line.
 
     ```javascript
-    var calendarRouter = require('./routes/calendar');
+    const calendarRouter = require('./routes/calendar');
     ```
 
 1. Add the following line **after** the `app.use('/auth', authRouter);` line.
@@ -143,7 +108,7 @@ Now you can add a view to display the results in a more user-friendly manner.
 
 1. Now update the route in **./routes/calendar.js** to use this view. Replace the existing route with the following code.
 
-    :::code language="javascript" source="../demo/graph-tutorial/routes/calendar.js" id="GetRouteSnippet" highlight="33-36,49,51-54,61":::
+    :::code language="javascript" source="../demo/graph-tutorial/routes/calendar.js" id="GetRouteSnippet" highlight="36-37,39-42,45":::
 
 1. Save your changes, restart the server, and sign in to the app. Click on the **Calendar** link and the app should now render a table of events.
 

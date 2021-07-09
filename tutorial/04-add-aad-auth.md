@@ -28,7 +28,7 @@ In this exercise you will extend the application from the previous exercise to s
 1. Create a new file in the **./routes** directory named **auth.js** and add the following code.
 
     ```javascript
-    var router = require('express-promise-router')();
+    const router = require('express-promise-router')();
 
     /* GET auth callback. */
     router.get('/signin',
@@ -123,7 +123,7 @@ In this exercise you will extend the application from the previous exercise to s
 1. Open **./app.js** and insert the following code **before** the `var app = express();` line.
 
     ```javascript
-    var authRouter = require('./routes/auth');
+    const authRouter = require('./routes/auth');
     ```
 
 1. Insert the following code **after** the `app.use('/', indexRouter);` line.
@@ -143,8 +143,8 @@ Start the server and browse to `https://localhost:3000`. Click the sign-in butto
     require('isomorphic-fetch');
 
     module.exports = {
-      getUserDetails: async function(accessToken) {
-        const client = getAuthenticatedClient(accessToken);
+      getUserDetails: async function(msalClient, userId) {
+        const client = getAuthenticatedClient(msalClient, userId);
 
         const user = await client
           .api('/me')
@@ -154,13 +154,41 @@ Start the server and browse to `https://localhost:3000`. Click the sign-in butto
       },
     };
 
-    function getAuthenticatedClient(accessToken) {
+    function getAuthenticatedClient(msalClient, userId) {
+      if (!msalClient || !userId) {
+        throw new Error(
+          `Invalid MSAL state. Client: ${msalClient ? 'present' : 'missing'}, User ID: ${userId ? 'present' : 'missing'}`);
+      }
+
       // Initialize Graph client
       const client = graph.Client.init({
-        // Use the provided access token to authenticate
-        // requests
-        authProvider: (done) => {
-          done(null, accessToken);
+        // Implement an auth provider that gets a token
+        // from the app's MSAL instance
+        authProvider: async (done) => {
+          try {
+            // Get the user's account
+            const account = await msalClient
+              .getTokenCache()
+              .getAccountByHomeId(userId);
+
+            if (account) {
+              // Attempt to get the token silently
+              // This method uses the token cache and
+              // refreshes expired tokens as needed
+              const response = await msalClient.acquireTokenSilent({
+                scopes: process.env.OAUTH_SCOPES.split(','),
+                redirectUri: process.env.OAUTH_REDIRECT_URI,
+                account: account
+              });
+
+              // First param to callback is the error,
+              // Set to null in success case
+              done(null, response.accessToken);
+            }
+          } catch (err) {
+            console.log(JSON.stringify(err, Object.getOwnPropertyNames(err)));
+            done(err, null);
+          }
         }
       });
 
@@ -173,12 +201,12 @@ Start the server and browse to `https://localhost:3000`. Click the sign-in butto
 1. Open **./routes/auth.js** and add the following `require` statements to the top of the file.
 
     ```javascript
-    var graph = require('../graph');
+    const graph = require('../graph');
     ```
 
 1. Replace the existing callback route with the following code.
 
-    :::code language="javascript" source="../demo/graph-tutorial/routes/auth.js" id="CallbackSnippet" highlight="13-23":::
+    :::code language="javascript" source="../demo/graph-tutorial/routes/auth.js" id="CallbackSnippet" highlight="13-26":::
 
     The new code saves the user's account ID in the session, gets the user's details from Microsoft Graph, and saves it in the app's user storage.
 
