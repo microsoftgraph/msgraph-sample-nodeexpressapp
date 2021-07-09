@@ -1,7 +1,7 @@
 {
-  "sourceDirectory": ".\\demo",
-  "exampleConfigFile": ".\\graph-tutorial\\example.env",
+  "sourceDirectory": "./demo",
+  "exampleConfigFile": "./graph-tutorial/example.env",
   "configFile": ".env",
   "archiveFile": "NodeExpressQuickStart.zip",
-  "zipReadMe": ".\\README.md"
+  "zipReadMe": "./README.md"
 }
