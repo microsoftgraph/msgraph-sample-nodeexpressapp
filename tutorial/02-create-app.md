@@ -55,9 +55,9 @@ Before moving on, install some additional packages that you will use later:
 1. Run the following command in your CLI.
 
     ```Shell
-    npm install dotenv@10.0.0 date-fns@2.22.1 date-fns-tz@1.1.4 connect-flash@0.1.1 express-validator@6.12.0
+    npm install dotenv@10.0.0 date-fns@2.23.0 date-fns-tz@1.1.6 connect-flash@0.1.1 express-validator@6.12.1
     npm install express-session@1.17.2 express-promise-router@4.1.0 isomorphic-fetch@3.0.0
-    npm install @azure/msal-node@1.1.0 @microsoft/microsoft-graph-client@3.0.0-Preview.2 windows-iana@5.0.2
+    npm install @azure/msal-node@1.3.0 @microsoft/microsoft-graph-client@3.0.0 windows-iana@5.0.2
     ```
 
     > [!TIP]
