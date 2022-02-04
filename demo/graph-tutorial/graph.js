@@ -19,12 +19,15 @@ module.exports = {
   getCalendarView: async function(msalClient, userId, start, end, timeZone) {
     const client = getAuthenticatedClient(msalClient, userId);
 
-    const events = await client
+    return client
       .api('/me/calendarview')
       // Add Prefer header to get back times in user's timezone
       .header("Prefer", `outlook.timezone="${timeZone}"`)
       // Add the begin and end of the calendar window
-      .query({ startDateTime: start, endDateTime: end })
+      .query({
+        startDateTime: encodeURIComponent(start),
+        endDateTime: encodeURIComponent(end)
+      })
       // Get just the properties used by the app
       .select('subject,organizer,start,end')
       // Order by start time
@@ -32,8 +35,6 @@ module.exports = {
       // Get at most 50 results
       .top(50)
       .get();
-
-    return events;
   },
   // </GetCalendarViewSnippet>
 
