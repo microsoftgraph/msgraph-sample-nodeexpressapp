@@ -6,7 +6,7 @@ products:
 - microsoft-graph-calendar-api
 - office-exchange-online
 languages:
-- node.js
+- nodejs
 ---
 
 # Microsoft Graph sample Node.js Express app
