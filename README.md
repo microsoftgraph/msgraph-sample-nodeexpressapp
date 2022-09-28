@@ -17,7 +17,7 @@ This sample demonstrates how to use the Microsoft Graph JavaScript SDK to access
 
 To run the completed project in this folder, you need the following:
 
-- [Node.js](https://nodejs.org) installed on your development machine. If you do not have Node.js, visit the previous link for download options. 
+- [Node.js](https://nodejs.org) installed on your development machine. If you do not have Node.js, visit the previous link for download options.
 - Either a personal Microsoft account with a mailbox on Outlook.com, or a Microsoft work or school account.
 
 If you don't have a Microsoft account, there are a couple of options to get a free account:
@@ -33,11 +33,11 @@ If you don't have a Microsoft account, there are a couple of options to get a fr
 
 1. Select **New registration**. On the **Register an application** page, set the values as follows.
 
-    - Set **Name** to `Node.js Graph Tutorial`.
+    - Set **Name** to `Node.js Graph Sample`.
     - Set **Supported account types** to **Accounts in any organizational directory and personal Microsoft accounts**.
     - Under **Redirect URI**, set the first drop-down to `Web` and set the value to `http://localhost:3000/auth/callback`.
 
-1. Choose **Register**. On the **Node.js Graph Tutorial** page, copy the value of the **Application (client) ID** and save it, you will need it in the next step.
+1. Choose **Register**. On the **Node.js Graph Sample** page, copy the value of the **Application (client) ID** and save it, you will need it in the next step.
 
 1. Select **Certificates & secrets** under **Manage**. Select the **New client secret** button. Enter a value in **Description** and select one of the options for **Expires** and choose **Add**.
 
@@ -52,7 +52,7 @@ If you don't have a Microsoft account, there are a couple of options to get a fr
 1. Edit the `.env` file and make the following changes.
     1. Replace `YOUR_CLIENT_SECRET_HERE` with the **Application Id** you got from the App Registration Portal.
     1. Replace `YOUR_APP_PASSWORD_HERE` with the password you got from the App Registration Portal.
-1. In your command-line interface (CLI), navigate to this directory and run the following command to install requirements.
+1. In your command-line interface (CLI), navigate to the **graph-sample** directory and run the following command to install requirements.
 
     ```Shell
     npm install
