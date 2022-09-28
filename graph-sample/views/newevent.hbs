@@ -1,0 +1,35 @@
+<!-- Copyright (c) Microsoft Corporation.
+     Licensed under the MIT License. -->
+
+<!-- <NewEventFormSnippet> -->
+<form method="POST">
+  <div class="form-group">
+    <label>Subject</label>
+    <input class="form-control" name="ev-subject" type="text" value="{{ newEvent.subject }}">
+  </div>
+  <div class="form-group">
+    <label>Attendees</label>
+    <input class="form-control" name="ev-attendees" type="text" value="{{ newEvent.attendees }}">
+  </div>
+  <div class="row">
+    <div class="col">
+      <div class="form-group">
+        <label>Start</label>
+        <input class="form-control" name="ev-start" type="datetime-local" value="{{ newEvent.start }}">
+      </div>
+    </div>
+    <div class="col">
+      <div class="form-group">
+        <label>End</label>
+        <input class="form-control" name="ev-end" type="datetime-local" value="{{ newEvent.end }}">
+      </div>
+    </div>
+  </div>
+  <div class="form-group mb-3">
+    <label>Body</label>
+    <textarea class="form-control" name="ev-body" rows="3">{{ newEvent.body }}</textarea>
+  </div>
+  <input class="btn btn-primary mr-2" type="submit" value="Create" />
+  <a class="btn btn-secondary" href="/calendar">Cancel</a>
+</form>
+<!-- </NewEventFormSnippet> -->
