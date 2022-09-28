@@ -10,7 +10,7 @@ jobs:
   build:
     defaults:
       run:
-        working-directory: /graph-sample
+        working-directory: graph-sample
 
     runs-on: ubuntu-latest
 
