@@ -27,7 +27,7 @@ app.locals.users = {};
 // MSAL config
 const msalConfig = {
   auth: {
-    clientId: process.env.OAUTH_CLIENT_ID,
+    clientId: process.env.OAUTH_CLIENT_ID || '',
     authority: process.env.OAUTH_AUTHORITY,
     clientSecret: process.env.OAUTH_CLIENT_SECRET
   },
@@ -88,12 +88,11 @@ app.set('view engine', 'hbs');
 
 // <FormatDateSnippet>
 var hbs = require('hbs');
-var parseISO = require('date-fns/parseISO');
-var formatDate = require('date-fns/format');
+var dateFns = require('date-fns');
 // Helper to format date/time sent by Graph
 hbs.registerHelper('eventDateTime', function(dateTime) {
-  const date = parseISO(dateTime);
-  return formatDate(date, 'M/d/yy h:mm a');
+  const date = dateFns.parseISO(dateTime);
+  return dateFns.format(date, 'M/d/yy h:mm a');
 });
 // </FormatDateSnippet>
 

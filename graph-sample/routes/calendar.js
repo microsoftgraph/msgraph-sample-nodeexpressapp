@@ -1,11 +1,9 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
-const router = require('express-promise-router')();
+const router = require('express-promise-router').default();
 const graph = require('../graph.js');
-const addDays = require('date-fns/addDays');
-const formatISO = require('date-fns/formatISO');
-const startOfWeek = require('date-fns/startOfWeek');
+const dateFns = require('date-fns');
 const zonedTimeToUtc = require('date-fns-tz/zonedTimeToUtc');
 const iana = require('windows-iana');
 const { body, validationResult } = require('express-validator');
@@ -34,17 +32,17 @@ router.get('/',
       // Get midnight on the start of the current week in the user's timezone,
       // but in UTC. For example, for Pacific Standard Time, the time value would be
       // 07:00:00Z
-      var weekStart = zonedTimeToUtc(startOfWeek(new Date()), timeZoneId.valueOf());
-      var weekEnd = addDays(weekStart, 7);
-      console.log(`Start: ${formatISO(weekStart)}`);
+      var weekStart = zonedTimeToUtc(dateFns.startOfWeek(new Date()), timeZoneId.valueOf());
+      var weekEnd = dateFns.addDays(weekStart, 7);
+      console.log(`Start: ${dateFns.formatISO(weekStart)}`);
 
       try {
         // Get the events
         const events = await graph.getCalendarView(
           req.app.locals.msalClient,
           req.session.userId,
-          formatISO(weekStart),
-          formatISO(weekEnd),
+          dateFns.formatISO(weekStart),
+          dateFns.formatISO(weekEnd),
           user.timeZone);
 
         // Assign the events to the view parameters
@@ -118,7 +116,7 @@ router.post('/new', [
     if (!formErrors.isEmpty()) {
 
       let invalidFields = '';
-      formErrors.errors.forEach(error => {
+      formErrors.array().forEach(error => {
         invalidFields += `${error.param.slice(3, error.param.length)},`;
       });
 

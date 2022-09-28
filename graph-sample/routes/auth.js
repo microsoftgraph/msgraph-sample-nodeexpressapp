@@ -2,13 +2,14 @@
 // Licensed under the MIT License.
 
 const graph = require('../graph');
-const router = require('express-promise-router')();
+const router = require('express-promise-router').default();
 
 /* GET auth callback. */
 router.get('/signin',
   async function (req, res) {
+    const scopes = process.env.OAUTH_SCOPES || 'https://graph.microsoft.com/.default';
     const urlParameters = {
-      scopes: process.env.OAUTH_SCOPES.split(','),
+      scopes: scopes.split(','),
       redirectUri: process.env.OAUTH_REDIRECT_URI
     };
 
@@ -31,9 +32,10 @@ router.get('/signin',
 // <CallbackSnippet>
 router.get('/callback',
   async function(req, res) {
+    const scopes = process.env.OAUTH_SCOPES || 'https://graph.microsoft.com/.default';
     const tokenRequest = {
       code: req.query.code,
-      scopes: process.env.OAUTH_SCOPES.split(','),
+      scopes: scopes.split(','),
       redirectUri: process.env.OAUTH_REDIRECT_URI
     };
 
