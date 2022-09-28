@@ -17,7 +17,7 @@ router.get('/',
   async function(req, res) {
     if (!req.session.userId) {
       // Redirect unauthenticated requests to home page
-      res.redirect('/')
+      res.redirect('/');
     } else {
       const params = {
         active: { calendar: true }
@@ -68,7 +68,7 @@ router.get('/new',
   function(req, res) {
     if (!req.session.userId) {
       // Redirect unauthenticated requests to home page
-      res.redirect('/')
+      res.redirect('/');
     } else {
       res.locals.newEvent = {};
       res.render('newevent');
@@ -102,7 +102,7 @@ router.post('/new', [
 ], async function(req, res) {
   if (!req.session.userId) {
     // Redirect unauthenticated requests to home page
-    res.redirect('/')
+    res.redirect('/');
   } else {
     // Build an object from the form values
     const formData = {
@@ -119,7 +119,7 @@ router.post('/new', [
 
       let invalidFields = '';
       formErrors.errors.forEach(error => {
-        invalidFields += `${error.param.slice(3, error.param.length)},`
+        invalidFields += `${error.param.slice(3, error.param.length)},`;
       });
 
       // Preserve the user's input when re-rendering the form

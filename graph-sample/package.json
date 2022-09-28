@@ -3,7 +3,8 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "node ./bin/www"
+    "start": "node ./bin/www",
+    "lint": "npx eslint . --ext .js"
   },
   "dependencies": {
     "@azure/msal-node": "^1.14.0",
@@ -23,5 +24,8 @@
     "isomorphic-fetch": "^3.0.0",
     "morgan": "^1.10.0",
     "windows-iana": "^5.1.0"
+  },
+  "devDependencies": {
+    "eslint": "^8.24.0"
   }
 }

@@ -34,7 +34,7 @@ const msalConfig = {
   system: {
     loggerOptions: {
       loggerCallback(loglevel, message, containsPii) {
-        console.log(message);
+        if (!containsPii) console.log(message);
       },
       piiLoggingEnabled: false,
       logLevel: msal.LogLevel.Verbose,
@@ -114,7 +114,7 @@ app.use(function(req, res, next) {
 });
 
 // error handler
-app.use(function(err, req, res, next) {
+app.use(function(err, req, res) {
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
