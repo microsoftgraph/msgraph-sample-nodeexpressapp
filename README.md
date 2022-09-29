@@ -11,6 +11,8 @@ languages:
 
 # Microsoft Graph sample Node.js Express app
 
+[![Node.js build](https://github.com/microsoftgraph/msgraph-training-nodeexpressapp/actions/workflows/node.js.yml/badge.svg)](https://github.com/microsoftgraph/msgraph-training-nodeexpressapp/actions/workflows/node.js.yml) ![License.](https://img.shields.io/badge/license-MIT-green.svg)
+
 This sample demonstrates how to use the Microsoft Graph JavaScript SDK to access data in Office 365 from Node.js Express apps.
 
 ## Prerequisites
@@ -50,8 +52,8 @@ If you don't have a Microsoft account, there are a couple of options to get a fr
 
 1. Rename the `example.env` file to `.env`.
 1. Edit the `.env` file and make the following changes.
-    1. Replace `YOUR_CLIENT_SECRET_HERE` with the **Application Id** you got from the App Registration Portal.
-    1. Replace `YOUR_APP_PASSWORD_HERE` with the password you got from the App Registration Portal.
+    1. Replace `YOUR_CLIENT_ID_HERE` with the **Application Id** you got from the App Registration Portal.
+    1. Replace `YOUR_CLIENT_SECRET_HERE` with the client secret you got from the App Registration Portal.
 1. In your command-line interface (CLI), navigate to the **graph-sample** directory and run the following command to install requirements.
 
     ```Shell
