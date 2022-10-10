@@ -16,7 +16,7 @@
     "date-fns-tz": "^1.3.7",
     "debug": "^4.3.4",
     "dotenv": "^16.0.3",
-    "express": "^4.18.1",
+    "express": "^4.18.2",
     "express-promise-router": "^4.1.1",
     "express-session": "^1.17.3",
     "express-validator": "^6.14.2",
