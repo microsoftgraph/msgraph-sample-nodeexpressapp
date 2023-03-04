@@ -18,7 +18,7 @@ module.exports = {
     const client = getAuthenticatedClient(msalClient, userId);
 
     return client
-      .api('/me/drive/root/children')
+      .api('/me/drive/items/132EB664B78CC9B1!127/workbook/worksheets')
       // Add Prefer header to get back times in user's timezone
       // .header('Prefer', `outlook.timezone="${timeZone}"`)
       // // Add the begin and end of the calendar window
@@ -31,7 +31,6 @@ module.exports = {
       // Order by start time
       // .orderby('start/dateTime')
       // Get at most 50 results
-      .top(50)
       .get();
   },
 
