@@ -14,6 +14,26 @@ module.exports = {
       .get();
     return user;
   },
+  getDriveItems: async function(msalClient, userId) {
+    const client = getAuthenticatedClient(msalClient, userId);
+
+    return client
+      .api('/me/drive/root/children')
+      // Add Prefer header to get back times in user's timezone
+      // .header('Prefer', `outlook.timezone="${timeZone}"`)
+      // // Add the begin and end of the calendar window
+      // .query({
+      //   startDateTime: encodeURIComponent(start),
+      //   endDateTime: encodeURIComponent(end)
+      // })
+      // Get just the properties used by the app
+      // .select('subject,organizer,start,end')
+      // Order by start time
+      // .orderby('start/dateTime')
+      // Get at most 50 results
+      .top(50)
+      .get();
+  },
 
   // <GetCalendarViewSnippet>
   getCalendarView: async function(msalClient, userId, start, end, timeZone) {

@@ -33,6 +33,11 @@
                 <a href="/calendar" class="nav-link{{#if active.calendar}} active{{/if}}">Calendar</a>
               </li>
             {{/if}}
+            {{#if user}}
+              <li class="nav-item" data-turbolinks="false">
+                <a href="/excel" class="nav-link{{#if active.calendar}} active{{/if}}">Excel</a>
+              </li>
+            {{/if}}
           </ul>
           <ul class="navbar-nav justify-content-end">
             <li class="nav-item">
