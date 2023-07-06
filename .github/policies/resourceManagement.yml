@@ -1,0 +1,160 @@
+id: 
+name: GitOps.PullRequestIssueManagement
+description: GitOps.PullRequestIssueManagement primitive
+owner: 
+resource: repository
+disabled: false
+where: 
+configuration:
+  resourceManagementConfiguration:
+    scheduledSearches:
+    - description: 
+      frequencies:
+      - hourly:
+          hour: 6
+      filters:
+      - isIssue
+      - isOpen
+      - hasLabel:
+          label: needs author feedback
+      - hasLabel:
+          label: no recent activity
+      - noActivitySince:
+          days: 3
+      actions:
+      - closeIssue
+    - description: 
+      frequencies:
+      - hourly:
+          hour: 6
+      filters:
+      - isIssue
+      - isOpen
+      - hasLabel:
+          label: needs author feedback
+      - noActivitySince:
+          days: 4
+      - isNotLabeledWith:
+          label: no recent activity
+      actions:
+      - addLabel:
+          label: no recent activity
+      - addReply:
+          reply: This issue has been automatically marked as stale because it has been marked as requiring author feedback but has not had any activity for **4 days**. It will be closed if no further activity occurs **within 3 days of this comment**.
+    - description: 
+      frequencies:
+      - hourly:
+          hour: 6
+      filters:
+      - isIssue
+      - isOpen
+      - hasLabel:
+          label: duplicate
+      - noActivitySince:
+          days: 1
+      actions:
+      - addReply:
+          reply: This issue has been marked as duplicate and has not had any activity for **1 day**. It will be closed for housekeeping purposes.
+      - closeIssue
+    - description: 
+      frequencies:
+      - hourly:
+          hour: 3
+      filters:
+      - isOpen
+      - isIssue
+      - hasLabel:
+          label: graph question
+      actions:
+      - removeLabel:
+          label: 'needs attention :wave:'
+      - removeLabel:
+          label: needs author feedback
+      - removeLabel:
+          label: 'needs triage :mag:'
+      - removeLabel:
+          label: no recent activity
+      - addLabel:
+          label: out of scope
+      - addReply:
+          reply: >-
+            It looks like you are asking a question about using Microsoft Graph or one of the Microsoft Graph SDKs that is not directly related to this sample. Unfortunately we are not set up to answer general questions in this repository, so this issue will be closed.
+
+
+            Please try asking your question on [Stack Overflow](https://stackoverflow.com/questions/tagged/microsoft-graph-api), tagging your question with `microsoft-graph-api`.
+      - closeIssue
+    - description: 
+      frequencies:
+      - hourly:
+          hour: 3
+      filters:
+      - isOpen
+      - isIssue
+      - hasLabel:
+          label: graph issue
+      actions:
+      - removeLabel:
+          label: 'needs attention :wave:'
+      - removeLabel:
+          label: needs author feedback
+      - removeLabel:
+          label: 'needs triage :mag:'
+      - removeLabel:
+          label: no recent activity
+      - addLabel:
+          label: out of scope
+      - addReply:
+          reply: >-
+            It looks like you are reporting an issue with Microsoft Graph or one of the Microsoft Graph SDKs that is not fixable by changing code in this sample. Unfortunately we are not set up to provide product support in this repository, so this issue will be closed.
+
+
+            Please visit one of the following links to report your issue.
+
+
+            - Issue with Microsoft Graph service: [Microsoft Graph support](https://developer.microsoft.com/graph/support#report-issues-with-the-service), choose one of the options under **Report issues with the service**
+
+            - Issue with a Microsoft Graph SDK: Open an issue in the SDK's GitHub repository. See [microsoftgraph on GitHub](https://github.com/microsoftgraph?q=sdk+in%3Aname&type=public&language=) for a list of SDK repositories.
+      - closeIssue
+    eventResponderTasks:
+    - if:
+      - payloadType: Issue_Comment
+      - isAction:
+          action: Created
+      - isActivitySender:
+          issueAuthor: True
+      - hasLabel:
+          label: needs author feedback
+      - isOpen
+      then:
+      - addLabel:
+          label: 'needs attention :wave:'
+      - removeLabel:
+          label: needs author feedback
+      description: 
+    - if:
+      - payloadType: Issues
+      - not:
+          isAction:
+            action: Closed
+      - hasLabel:
+          label: no recent activity
+      then:
+      - removeLabel:
+          label: no recent activity
+      description: 
+    - if:
+      - payloadType: Issue_Comment
+      - hasLabel:
+          label: no recent activity
+      then:
+      - removeLabel:
+          label: no recent activity
+      description: 
+    - if:
+      - payloadType: Pull_Request
+      then:
+      - inPrLabel:
+          label: in pr
+      description: 
+onFailure: 
+onSuccess: 
