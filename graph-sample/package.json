@@ -27,7 +27,7 @@
     "windows-iana": "^5.1.0"
   },
   "devDependencies": {
-    "@types/node": "^18.16.0",
+    "@types/node": "^20.4.4",
     "eslint": "^8.45.0",
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-promise": "^6.1.1",
