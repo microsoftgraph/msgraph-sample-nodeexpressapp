@@ -117,7 +117,9 @@ router.post('/new', [
 
       let invalidFields = '';
       formErrors.array().forEach(error => {
-        invalidFields += `${error.param.slice(3, error.param.length)},`;
+        if (error.type == 'field') {
+          invalidFields += `${error.path.slice(3, error.path.length)},`;
+        }
       });
 
       // Preserve the user's input when re-rendering the form
