@@ -8,8 +8,8 @@
     "build": "npx tsc"
   },
   "dependencies": {
-    "@azure/msal-node": "^2.0.2",
-    "@microsoft/microsoft-graph-client": "^3.0.5",
+    "@azure/msal-node": "^2.1.0",
+    "@microsoft/microsoft-graph-client": "^3.0.6",
     "connect-flash": "^0.1.1",
     "cookie-parser": "~1.4.4",
     "date-fns": "^2.30.0",
@@ -19,7 +19,7 @@
     "express": "^4.18.2",
     "express-promise-router": "^4.1.1",
     "express-session": "^1.17.3",
-    "express-validator": "^6.15.0",
+    "express-validator": "^7.0.1",
     "hbs": "^4.2.0",
     "http-errors": "^2.0.0",
     "isomorphic-fetch": "^3.0.0",
@@ -28,7 +28,7 @@
   },
   "devDependencies": {
     "@types/node": "^20.5.9",
-    "eslint": "^8.47.0",
+    "eslint": "^8.48.0",
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-promise": "^6.1.1",
     "typescript": "^5.2.2"
