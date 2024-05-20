@@ -19,7 +19,7 @@
     "express": "^4.19.2",
     "express-promise-router": "^4.1.1",
     "express-session": "^1.18.0",
-    "express-validator": "^7.0.1",
+    "express-validator": "^7.1.0",
     "hbs": "^4.2.0",
     "http-errors": "^2.0.0",
     "isomorphic-fetch": "^3.0.0",
