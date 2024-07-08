@@ -31,6 +31,6 @@
     "eslint": "^8.57.0",
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-promise": "^6.4.0",
-    "typescript": "^5.5.2"
+    "typescript": "^5.5.3"
   }
 }
